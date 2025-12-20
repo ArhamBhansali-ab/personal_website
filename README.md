@@ -72,3 +72,4 @@ Simply edit these files to update your site content.
 - TypeScript
 - Tailwind CSS
 - Lucide React (Icons)
+# personal_website
