@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-[#fafaf9] text-neutral-900">
         <Navbar />
         <main>{children}</main>
         <Footer />

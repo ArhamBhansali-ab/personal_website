@@ -3,119 +3,106 @@ import Container from "@/components/Container";
 import Tag from "@/components/Tag";
 import Button from "@/components/Button";
 import { projects } from "@/content/projects";
-import { ExternalLink, Github, FileText } from "lucide-react";
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
-  if (!project) return { title: "Project Not Found" };
+  if (!project) return { title: "Not Found" };
   return { title: project.title };
 }
 
-export default function ProjectDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
-
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   return (
     <Container>
-      <div className="py-20 max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-          <div className="flex flex-wrap gap-2 mb-6">
+      <div className="py-20 max-w-2xl">
+        <div className="mb-10">
+          <p className="font-mono text-xs text-neutral-400 mb-3">{project.year}</p>
+          <h1 className="text-2xl font-semibold text-neutral-900 mb-4">
+            {project.title}
+          </h1>
+          <div className="flex flex-wrap gap-1.5 mb-6">
             {project.tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
             ))}
           </div>
           {project.links && (
-            <div className="flex gap-4 mb-8">
+            <div className="flex flex-wrap gap-4 text-sm">
               {project.links.github && (
                 <a
                   href={project.links.github}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
                 >
-                  <Github className="w-5 h-5" /> View Code
+                  GitHub →
                 </a>
               )}
               {project.links.demo && (
                 <a
                   href={project.links.demo}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
                 >
-                  <ExternalLink className="w-5 h-5" /> Live Demo
+                  Live demo →
                 </a>
               )}
               {project.links.paper && (
                 <a
                   href={project.links.paper}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
                 >
-                  <FileText className="w-5 h-5" /> Read Paper
+                  Paper →
                 </a>
               )}
             </div>
           )}
         </div>
 
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              {project.description}
+        <div className="space-y-8 text-base text-neutral-600 leading-relaxed border-t border-neutral-200 pt-10">
+          <section>
+            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Overview</h2>
+            <p>{project.description}</p>
+          </section>
+
+          <section>
+            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Problem</h2>
+            <p>
+              This project addresses a core challenge in the field, focusing on
+              practical constraints and real-world deployment requirements.
             </p>
           </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Problem</h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              This project addresses key challenges in the field, focusing on
-              practical solutions and real-world impact.
+          <section>
+            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Approach</h2>
+            <p>
+              The solution combines hardware and software co-design with
+              principled data engineering to meet the demands of the target
+              environment.
             </p>
           </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Approach</h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              The solution leverages modern technologies and best practices to
-              deliver scalable and efficient results.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Results</h2>
-            <p className="text-gray-700 dark:text-gray-300">
-              The project achieved significant improvements and positive outcomes
-              in its target domain.
+          <section>
+            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Outcome</h2>
+            <p>
+              The project produced measurable improvements and is designed for
+              reproducibility and further extension.
             </p>
           </section>
         </div>
 
-        <div className="mt-12">
-          <Button href="/projects">← Back to Projects</Button>
+        <div className="mt-14">
+          <Button href="/projects" variant="secondary">← Back to projects</Button>
         </div>
       </div>
     </Container>
   );
 }
-

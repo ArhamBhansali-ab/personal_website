@@ -14,30 +14,24 @@ export default function Button({
   variant = "primary",
   external = false,
 }: ButtonProps) {
-  const baseClasses =
-    "inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
-  const variantClasses =
+  const base =
+    "inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-medium transition-colors";
+  const styles =
     variant === "primary"
-      ? "bg-black text-white hover:bg-gray-800 focus:ring-black"
-      : "bg-gray-100 text-black hover:bg-gray-200 focus:ring-gray-500";
+      ? `${base} bg-neutral-900 text-white hover:bg-neutral-700`
+      : `${base} border border-neutral-300 text-neutral-700 hover:border-neutral-500 hover:text-neutral-900`;
 
   if (external) {
     return (
-      <a
-        href={href}
-        className={`${baseClasses} ${variantClasses}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={href} className={styles} target="_blank" rel="noopener noreferrer">
         {children}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={`${baseClasses} ${variantClasses}`}>
+    <Link href={href} className={styles}>
       {children}
     </Link>
   );
 }
-

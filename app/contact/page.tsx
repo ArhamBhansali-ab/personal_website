@@ -1,75 +1,49 @@
 import Container from "@/components/Container";
-import SocialLinks from "@/components/SocialLinks";
-import { Mail, Github, Linkedin, GraduationCap } from "lucide-react";
 import { site } from "@/content/site";
 
 export const metadata = {
   title: "Contact",
 };
 
+const links = [
+  { label: "Email", value: site.socials.email, href: `mailto:${site.socials.email}` },
+  { label: "GitHub", value: "arhambhansali", href: site.socials.github },
+  { label: "LinkedIn", value: "arhambhansali", href: site.socials.linkedin },
+  { label: "Google Scholar", value: "Scholar profile", href: site.socials.scholar },
+];
+
 export default function Contact() {
-  const { socials } = site;
-
-  const contactCards = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: socials.email,
-      href: `mailto:${socials.email}`,
-    },
-    {
-      icon: Github,
-      title: "GitHub",
-      value: "github.com/arhambhansali",
-      href: socials.github,
-    },
-    {
-      icon: Linkedin,
-      title: "LinkedIn",
-      value: "linkedin.com/in/arhambhansali",
-      href: socials.linkedin,
-    },
-    {
-      icon: GraduationCap,
-      title: "Google Scholar",
-      value: "View Publications",
-      href: socials.scholar,
-    },
-  ];
-
   return (
     <Container>
-      <div className="py-20 max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">Get in Touch</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">
-          I&apos;m always open to discussing new projects, research
-          opportunities, or collaborations. Feel free to reach out!
+      <div className="py-20 max-w-2xl">
+        <h1 className="text-2xl font-semibold text-neutral-900 mb-2">Contact</h1>
+        <p className="text-neutral-500 mb-12 leading-relaxed">
+          Open to research collaborations, interesting engineering problems, and
+          internship opportunities. Best reached by email.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {contactCards.map(({ icon: Icon, title, value, href }) => (
-            <a
-              key={title}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-6 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-lg"
-            >
-              <Icon className="w-8 h-8 mb-4" />
-              <h3 className="font-semibold mb-2">{title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{value}</p>
-            </a>
+        <div className="divide-y divide-neutral-100">
+          {links.map(({ label, value, href }) => (
+            <div key={label} className="flex items-baseline justify-between py-4">
+              <span className="text-xs uppercase tracking-widest text-neutral-400 w-32 shrink-0">
+                {label}
+              </span>
+              <a
+                href={href}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                className="text-neutral-700 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
+              >
+                {value}
+              </a>
+            </div>
           ))}
         </div>
 
-        <div className="text-center">
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Or connect via social media:
-          </p>
-          <SocialLinks />
+        <div className="mt-12 pt-8 border-t border-neutral-200 text-sm text-neutral-500 leading-relaxed">
+          Based in Durham, NC · Duke University
         </div>
       </div>
     </Container>
   );
 }
-

@@ -1,24 +1,28 @@
 import { site } from "@/content/site";
-import SocialLinks from "./SocialLinks";
 import Container from "./Container";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 mt-20">
+    <footer className="border-t border-neutral-200 mt-24">
       <Container>
-        <div className="py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-600 dark:text-gray-400">
-            © {currentYear} {site.name}
-          </p>
-          <SocialLinks />
-          <p className="text-sm text-gray-500 dark:text-gray-500">
-            Built with Next.js
-          </p>
+        <div className="py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-neutral-400">
+          <p>© {new Date().getFullYear()} {site.name}</p>
+          <div className="flex gap-6">
+            <a href={`mailto:${site.socials.email}`} className="hover:text-neutral-700 transition-colors">
+              Email
+            </a>
+            <a href={site.socials.github} target="_blank" rel="noopener noreferrer" className="hover:text-neutral-700 transition-colors">
+              GitHub
+            </a>
+            <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-neutral-700 transition-colors">
+              LinkedIn
+            </a>
+            <a href={site.socials.scholar} target="_blank" rel="noopener noreferrer" className="hover:text-neutral-700 transition-colors">
+              Scholar
+            </a>
+          </div>
         </div>
       </Container>
     </footer>
   );
 }
-

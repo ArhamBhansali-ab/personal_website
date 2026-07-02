@@ -8,11 +8,9 @@ import { projects } from "@/content/projects";
 export default function ProjectsPage() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  const allTags = Array.from(
-    new Set(projects.flatMap((p) => p.tags))
-  ).sort();
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
 
-  const filteredProjects =
+  const filtered =
     selectedTag === null
       ? projects
       : projects.filter((p) => p.tags.includes(selectedTag));
@@ -20,19 +18,18 @@ export default function ProjectsPage() {
   return (
     <Container>
       <div className="py-20">
-        <h1 className="text-4xl font-bold mb-4">Projects</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          A collection of my work in AI, systems, and research.
+        <h1 className="text-2xl font-semibold text-neutral-900 mb-2">Projects</h1>
+        <p className="text-neutral-500 mb-10">
+          A collection of work across embedded systems, ML, and research.
         </p>
 
-        {/* Tag Filter */}
         <div className="mb-8 flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedTag(null)}
-            className={`px-4 py-2 rounded-lg transition-colors ${
+            className={`px-3 py-1.5 rounded text-sm transition-colors ${
               selectedTag === null
-                ? "bg-black text-white"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                ? "bg-neutral-900 text-white"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
             }`}
           >
             All
@@ -41,10 +38,10 @@ export default function ProjectsPage() {
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-3 py-1.5 rounded text-sm transition-colors ${
                 selectedTag === tag
-                  ? "bg-black text-white"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  ? "bg-neutral-900 text-white"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
               }`}
             >
               {tag}
@@ -52,14 +49,16 @@ export default function ProjectsPage() {
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              item={project}
+              href={`/projects/${project.slug}`}
+            />
           ))}
         </div>
       </div>
     </Container>
   );
 }
-
