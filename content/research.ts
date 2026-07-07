@@ -15,6 +15,15 @@ export interface Research {
 
 export const research: Research[] = [
   {
+    title: "Biological Lifespan of Humans and the Influence of Growth Parameters and Temperature",
+    slug: "lifespan-growth-temperature",
+    description:
+      "An unpublished study from the Research Science Institute (RSI) under Prof. James Michaelson of Harvard Medical School, modeling how temperature affects lifespan through Life History Theory and a Binary Cellular Biology framework.",
+    tags: ["Modeling", "Biology", "Unpublished"],
+    year: "2024",
+    featured: true,
+  },
+  {
     title: "Soil Deformation Measurement via Digital Image Analysis",
     slug: "soil-deformation-image-analysis",
     description:
@@ -30,15 +39,6 @@ export const research: Research[] = [
       "Data analysis and scraping work with PoCRA, a World Bank–aided Project on Climate Resilient Agriculture in Maharashtra. Focused on evaluating water-saving and micro-irrigation practices across rainfed farming regions.",
     tags: ["Data Analysis", "Climate", "Agriculture"],
     year: "2023",
-    featured: true,
-  },
-  {
-    title: "Biological Lifespan of Humans and the Influence of Growth Parameters and Temperature",
-    slug: "lifespan-growth-temperature",
-    description:
-      "An unpublished study from the Research Science Institute (RSI) under Prof. James Michaelson of Harvard Medical School, modeling how temperature affects lifespan through Life History Theory and a Binary Cellular Biology framework.",
-    tags: ["Modeling", "Biology", "Unpublished"],
-    year: "2024",
     featured: true,
   },
   {

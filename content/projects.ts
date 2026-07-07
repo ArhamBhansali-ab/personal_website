@@ -15,27 +15,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "LandSight",
-    slug: "landsight",
-    description:
-      "A real-time landslide early-warning system that upgrades daily risk forecasts to hourly predictions. Combines random forest, XGBoost, and LSTM models with GraphCast weather data and synthetic event generation to handle severe class imbalance across Indian terrain.",
-    tags: ["ML", "Geospatial", "Feature Engineering", "Python"],
-    year: "2024",
-    links: {
-      github: "https://github.com/arhambhansali/landsight",
-    },
-    featured: true,
-  },
-  {
-    title: "Paintbrush Cleaning Tool",
-    slug: "paintbrush-cleaning-tool",
-    description:
-      "An autonomous dual-carriage paintbrush cleaner built for a professional oil painter as an Engineering 101 client project. Uses an ESP32, stepper motors, and limit switches to run three distinct cleaning modes without manual intervention.",
-    tags: ["Arduino", "Electrical Engineering", "Embedded"],
-    year: "2025",
-    featured: true,
-  },
-  {
     title: "Celer",
     slug: "celer-bio",
     description:
@@ -54,15 +33,6 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "PillMate AI",
-    slug: "pillmate-ai",
-    description:
-      "A medication management tool that uses NLP and OCR to scan prescriptions and help users track dosages and refills. Built to reduce the friction of manually logging medication schedules.",
-    tags: ["NLP", "OCR", "AI"],
-    year: "2024",
-    featured: false,
-  },
-  {
     title: "Melasma Care App",
     slug: "melasma-care-app",
     description:
@@ -70,5 +40,35 @@ export const projects: Project[] = [
     tags: ["Health", "App"],
     year: "2026",
     featured: false,
+  },
+  {
+    title: "Paintbrush Cleaning Tool",
+    slug: "paintbrush-cleaning-tool",
+    description:
+      "An autonomous dual-carriage paintbrush cleaner built for a professional oil painter as an Engineering 101 client project. Uses an ESP32, stepper motors, and limit switches to run three distinct cleaning modes without manual intervention.",
+    tags: ["Arduino", "Electrical Engineering", "Embedded"],
+    year: "2025",
+    featured: true,
+  },
+  {
+    title: "PillMate AI",
+    slug: "pillmate-ai",
+    description:
+      "A medication management tool that uses NLP and OCR to scan prescriptions and help users track dosages and refills. Built to reduce the friction of manually logging medication schedules.",
+    tags: ["NLP", "OCR", "AI"],
+    year: "2025",
+    featured: false,
+  },
+  {
+    title: "LandSight",
+    slug: "landsight",
+    description:
+      "A real-time landslide early-warning system that upgrades daily risk forecasts to hourly predictions. Combines random forest, XGBoost, and LSTM models with GraphCast weather data and synthetic event generation to handle severe class imbalance across Indian terrain.",
+    tags: ["ML", "Geospatial", "Feature Engineering", "Python"],
+    year: "2024",
+    links: {
+      github: "https://github.com/arhambhansali/landsight",
+    },
+    featured: true,
   },
 ];
