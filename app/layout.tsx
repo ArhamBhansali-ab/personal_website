@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/content/site";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PersonJsonLd from "@/components/PersonJsonLd";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`https://${site.domain}`),
   title: {
     default: site.name,
     template: `%s | ${site.name}`,
@@ -56,6 +58,7 @@ export default function RootLayout({
       className={`${inter.variable} ${fraunces.variable} ${caveat.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen bg-brand-bg text-brand-text font-sans">
+        <PersonJsonLd />
         <Navbar />
         <main>{children}</main>
         <Footer />
