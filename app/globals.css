@@ -62,11 +62,11 @@ body::before {
   }
 
   .tilt-hover:hover {
-    transform: rotate(-0.6deg) translateY(-2px);
+    transform: rotate(-1.5deg) translateY(-2px);
   }
 
   .tilt-hover-alt:hover {
-    transform: rotate(0.6deg) translateY(-2px);
+    transform: rotate(1.5deg) translateY(-2px);
   }
 }
 

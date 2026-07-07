@@ -41,7 +41,7 @@ export default function Home() {
             <h1 className="font-script text-5xl text-brand-accent mb-1">
               hi, i&apos;m
             </h1>
-            <p className="font-serif text-3xl font-medium tracking-tight text-brand-text">
+            <p className="font-script text-6xl text-brand-text">
               Arham Bhansali
             </p>
             <p className="mt-2 text-brand-text-secondary">
