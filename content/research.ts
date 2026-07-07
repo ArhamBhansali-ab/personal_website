@@ -20,7 +20,7 @@ export const research: Research[] = [
     description:
       "A MATLAB-based particle image velocimetry (PIV) method for measuring soil deformation without intrusive on-sample transducers. Conducted with Prof. Ashish Juneja in the Civil Engineering department at IIT Bombay as an alternative to standard triaxial soil testing instrumentation.",
     tags: ["MATLAB", "GeoPIV", "Civil Engineering"],
-    year: "2024",
+    year: "2023/24",
     featured: true,
   },
   {
@@ -38,7 +38,7 @@ export const research: Research[] = [
     description:
       "An unpublished study from the Research Science Institute (RSI) under Prof. James Michaelson of Harvard Medical School, modeling how temperature affects lifespan through Life History Theory and a Binary Cellular Biology framework.",
     tags: ["Modeling", "Biology", "Unpublished"],
-    year: "2023",
+    year: "2024",
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ export const research: Research[] = [
     description:
       "A policy and technical report written during an internship at the State Climate Action Cell, Maharashtra, India, surveying carbon capture, utilization, and storage approaches relevant to state-level climate strategy.",
     tags: ["Climate Policy", "Report"],
-    year: "2023",
+    year: "2024",
     featured: false,
   },
 ];
