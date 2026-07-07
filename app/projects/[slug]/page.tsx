@@ -22,8 +22,8 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
     <Container>
       <div className="py-20 max-w-2xl">
         <div className="mb-10">
-          <p className="font-mono text-xs text-neutral-400 mb-3">{project.year}</p>
-          <h1 className="text-2xl font-semibold text-neutral-900 mb-4">
+          <p className="font-mono text-xs text-brand-text-muted mb-3">{project.year}</p>
+          <h1 className="font-serif text-3xl font-medium text-brand-text mb-4">
             {project.title}
           </h1>
           <div className="flex flex-wrap gap-1.5 mb-6">
@@ -38,7 +38,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                   href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
+                  className="link-squiggle text-brand-text-secondary hover:text-brand-accent transition-colors"
                 >
                   GitHub →
                 </a>
@@ -48,7 +48,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                   href={project.links.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
+                  className="link-squiggle text-brand-text-secondary hover:text-brand-accent transition-colors"
                 >
                   Live demo →
                 </a>
@@ -58,7 +58,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                   href={project.links.paper}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-500 hover:text-neutral-900 hover:underline underline-offset-2 transition-colors"
+                  className="link-squiggle text-brand-text-secondary hover:text-brand-accent transition-colors"
                 >
                   Paper →
                 </a>
@@ -67,34 +67,13 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
           )}
         </div>
 
-        <div className="space-y-8 text-base text-neutral-600 leading-relaxed border-t border-neutral-200 pt-10">
+        <div className="border-t border-brand-border pt-10">
           <section>
-            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Overview</h2>
-            <p>{project.description}</p>
-          </section>
-
-          <section>
-            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Problem</h2>
-            <p>
-              This project addresses a core challenge in the field, focusing on
-              practical constraints and real-world deployment requirements.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Approach</h2>
-            <p>
-              The solution combines hardware and software co-design with
-              principled data engineering to meet the demands of the target
-              environment.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-sm uppercase tracking-widest text-neutral-400 mb-3">Outcome</h2>
-            <p>
-              The project produced measurable improvements and is designed for
-              reproducibility and further extension.
+            <h2 className="text-sm uppercase tracking-widest text-brand-text-muted mb-3">
+              Overview
+            </h2>
+            <p className="text-base text-brand-text-secondary leading-relaxed">
+              {project.description}
             </p>
           </section>
         </div>

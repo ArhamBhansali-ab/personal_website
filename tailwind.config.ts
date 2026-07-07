@@ -9,11 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        script: ["var(--font-script)", "cursive"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       maxWidth: {
         container: "64rem",
+      },
+      colors: {
+        brand: {
+          bg: "#F7F4EF",
+          "bg-alt": "#F1ECE3",
+          card: "#FFFFFF",
+          border: "#E4DDD1",
+          text: "#2B2620",
+          "text-secondary": "#5C5548",
+          "text-muted": "#9C9384",
+          accent: "#C1552F",
+          "accent-hover": "#9E4325",
+          "accent-tint": "#F1DCC9",
+        },
       },
     },
   },

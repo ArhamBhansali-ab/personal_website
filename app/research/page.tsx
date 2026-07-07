@@ -10,17 +10,20 @@ export default function ResearchPage() {
   return (
     <Container>
       <div className="py-20">
-        <h1 className="text-2xl font-semibold text-neutral-900 mb-2">Research</h1>
-        <p className="text-neutral-500 mb-10 max-w-xl">
-          Work at the intersection of computation, physical systems, and data.
+        <p className="font-script text-2xl text-brand-accent mb-2">
+          things i&apos;ve researched
         </p>
+        <h1 className="font-serif text-2xl font-medium text-brand-text mb-10">
+          Research
+        </h1>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {research.map((item) => (
+        <div>
+          {research.map((item, i) => (
             <ProjectCard
               key={item.slug}
               item={item}
               href={`/research/${item.slug}`}
+              index={i}
             />
           ))}
         </div>

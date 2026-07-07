@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/Container";
-import SocialLinks from "@/components/SocialLinks";
+import Connections from "@/components/Connections";
+import Blob from "@/components/Blob";
 import { site } from "@/content/site";
 import { projects, Project } from "@/content/projects";
 
@@ -8,27 +9,21 @@ export const metadata = {
   title: "Home",
 };
 
-function WorkRow({ project }: { project: Project }) {
+function WorkRow({ project, index }: { project: Project; index: number }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group flex gap-6 py-5 border-b border-neutral-100 last:border-0 hover:opacity-70 transition-opacity"
+      className={`group flex gap-6 py-5 border-b border-brand-border last:border-0 ${
+        index % 2 === 0 ? "tilt-hover" : "tilt-hover-alt"
+      }`}
     >
-      <span className="font-mono text-xs text-neutral-400 w-10 shrink-0 pt-1">
+      <span className="font-mono text-xs text-brand-text-muted w-10 shrink-0 pt-1">
         {project.year}
       </span>
       <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-          <span className="font-medium text-neutral-900 group-hover:underline underline-offset-2">
-            {project.title}
-          </span>
-          <span className="text-sm text-neutral-400">
-            {project.tags.slice(0, 2).join(" · ")}
-          </span>
-        </div>
-        <p className="mt-1 text-sm text-neutral-500 leading-relaxed">
-          {project.description}
-        </p>
+        <span className="font-serif text-lg text-brand-text link-squiggle group-hover:text-brand-accent">
+          {project.title}
+        </span>
       </div>
     </Link>
   );
@@ -39,37 +34,43 @@ export default function Home() {
 
   return (
     <div>
-      <section className="pt-20 pb-16">
+      <section className="relative pt-20 pb-16 overflow-hidden">
+        <Blob className="absolute -top-16 -right-24 w-80 h-80 text-brand-accent-tint opacity-60 blur-2xl pointer-events-none" />
         <Container>
-          <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">
-            Arham Bhansali
-          </h1>
-          <p className="mt-2 text-neutral-500">
-            ECE + Physics · Duke University
-          </p>
-          <p className="mt-6 max-w-xl text-base text-neutral-600 leading-relaxed">
-            {site.bioShort}
-          </p>
-          <div className="mt-8">
-            <SocialLinks />
+          <div className="relative">
+            <h1 className="font-script text-5xl text-brand-accent mb-1">
+              hi, i&apos;m
+            </h1>
+            <p className="font-serif text-3xl font-medium tracking-tight text-brand-text">
+              Arham Bhansali
+            </p>
+            <p className="mt-2 text-brand-text-secondary">
+              ECE + Physics · Duke University
+            </p>
+            <p className="mt-6 max-w-xl text-base text-brand-text-secondary leading-relaxed">
+              {site.bioShort}
+            </p>
+            <div className="mt-8">
+              <Connections />
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-12 border-t border-neutral-200">
+      <section className="py-12 border-t border-brand-border">
         <Container>
-          <p className="text-xs uppercase tracking-widest text-neutral-400 mb-8">
-            Selected work
+          <p className="font-script text-2xl text-brand-accent mb-6">
+            a few things i&apos;ve built
           </p>
           <div>
-            {featured.map((project) => (
-              <WorkRow key={project.slug} project={project} />
+            {featured.map((project, i) => (
+              <WorkRow key={project.slug} project={project} index={i} />
             ))}
           </div>
           <div className="mt-8">
             <Link
               href="/projects"
-              className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
+              className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
             >
               All projects →
             </Link>

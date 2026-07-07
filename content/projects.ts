@@ -18,8 +18,8 @@ export const projects: Project[] = [
     title: "LandSight",
     slug: "landsight",
     description:
-      "Real-time landslide early-warning system that upgrades daily risk pipelines to hourly AI predictions. Uses synthetic event generation, GraphCast atmospheric inputs, and terrain-aware gradient boosting to handle severe class imbalance on Indian geographies.",
-    tags: ["ML", "Feature Engineering", "Python", "Geospatial"],
+      "A real-time landslide early-warning system that upgrades daily risk forecasts to hourly predictions. Combines random forest, XGBoost, and LSTM models with GraphCast weather data and synthetic event generation to handle severe class imbalance across Indian terrain.",
+    tags: ["ML", "Geospatial", "Feature Engineering", "Python"],
     year: "2025",
     links: {
       github: "https://github.com/arhambhansali/landsight",
@@ -27,51 +27,48 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Neural Interface Signal Pipeline",
-    slug: "neural-interface-pipeline",
+    title: "Paintbrush Cleaning Tool",
+    slug: "paintbrush-cleaning-tool",
     description:
-      "End-to-end EEG acquisition and classification pipeline for a low-cost BCI. Covers analog front-end noise budgeting, real-time firmware on STM32, and an LSTM-based intent classifier trained on motor-imagery data.",
-    tags: ["Neurotech", "Embedded C", "STM32", "Deep Learning"],
+      "An autonomous dual-carriage paintbrush cleaner built for a professional oil painter as an Engineering 101 client project. Uses an ESP32, stepper motors, and limit switches to run three distinct cleaning modes without manual intervention.",
+    tags: ["Arduino", "Electrical Engineering", "Embedded"],
+    year: "2024",
+    featured: true,
+  },
+  {
+    title: "Celer",
+    slug: "celer-bio",
+    description:
+      "A biotech startup building AI-driven data infrastructure that retrieves, cleans, and standardizes multi-omics biological data from sources like GEO and PRIDE. Designed as a headless system so research labs can plug it directly into their own analysis pipelines.",
+    tags: ["Startup", "Biotech", "AI"],
     year: "2025",
-    links: {
-      github: "https://github.com/arhambhansali/neural-interface",
-    },
     featured: true,
   },
   {
-    title: "RSI Lifespan Model",
-    slug: "rsi-lifespan-model",
+    title: "Motorbike",
+    slug: "motorbike",
     description:
-      "Computational model of temperature-driven lifespan variation rooted in life-history theory and binary cellular biology. Produces quantitative predictions for biological resilience under climate stress scenarios.",
-    tags: ["Computational Biology", "Python", "Modeling", "Physics"],
+      "A foldable electric motorbike built around a custom 20s12p P42A 21700 li-ion battery pack running at 74–84V for up to 20kW peak output. Pairs a QS138 motor and Nucular P24F controller with a chromoly swingarm and a jackshaft-driven folding drivetrain.",
+    tags: ["CAD", "Electrical Engineering", "Wiring"],
     year: "2024",
-    links: {
-      paper: "https://scholar.google.com/citations?user=XZ0I5rkAAAAJ&hl=en",
-    },
     featured: true,
   },
   {
-    title: "Battery Management System",
-    slug: "battery-management-system",
+    title: "PillMate AI",
+    slug: "pillmate-ai",
     description:
-      "Custom BMS for a multi-cell Li-ion pack with active cell balancing, state-of-charge estimation via Coulomb counting and an EKF, and CAN bus telemetry for real-time monitoring.",
-    tags: ["Embedded C", "Power Electronics", "STM32", "CAN"],
+      "A medication management tool that uses NLP and OCR to scan prescriptions and help users track dosages and refills. Built to reduce the friction of manually logging medication schedules.",
+    tags: ["NLP", "OCR", "AI"],
     year: "2024",
-    links: {
-      github: "https://github.com/arhambhansali/bms",
-    },
     featured: false,
   },
   {
-    title: "IMU Gesture Classifier",
-    slug: "imu-gesture-classifier",
+    title: "Melasma Care App",
+    slug: "melasma-care-app",
     description:
-      "On-device gesture recognition running on a Cortex-M4 using a quantized 1D-CNN trained on raw IMU data. Achieves 94% accuracy at under 2 ms inference latency with no host connection.",
-    tags: ["TinyML", "Embedded C", "Arm Cortex-M", "PyTorch"],
+      "An early-stage app concept for tracking and managing melasma skincare routines. More details coming soon.",
+    tags: ["Health", "App"],
     year: "2024",
-    links: {
-      github: "https://github.com/arhambhansali/imu-gesture",
-    },
     featured: false,
   },
 ];

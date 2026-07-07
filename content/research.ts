@@ -15,49 +15,39 @@ export interface Research {
 
 export const research: Research[] = [
   {
-    title: "Temperature-Driven Lifespan Modeling in RSI",
-    slug: "rsi-lifespan-temperature",
+    title: "Soil Deformation Measurement via Digital Image Analysis",
+    slug: "soil-deformation-image-analysis",
     description:
-      "Computational study of how temperature sensitivity governs lifespan in a binary cellular biology framework. Derives closed-form predictions from life-history theory and validates them against empirical aging data.",
-    tags: ["Computational Biology", "Modeling", "Physics", "Aging"],
+      "A MATLAB-based particle image velocimetry (PIV) method for measuring soil deformation without intrusive on-sample transducers. Conducted with Prof. Ashish Juneja in the Civil Engineering department at IIT Bombay as an alternative to standard triaxial soil testing instrumentation.",
+    tags: ["MATLAB", "GeoPIV", "Civil Engineering"],
     year: "2024",
-    links: {
-      paper: "https://scholar.google.com/citations?user=XZ0I5rkAAAAJ&hl=en",
-    },
     featured: true,
   },
   {
-    title: "Terrain-Aware Landslide Nowcasting with GraphCast",
-    slug: "terrain-aware-landslide-nowcasting",
+    title: "Coping with Climate Change Using Climate-Resilient Technology in Rainfed Areas",
+    slug: "climate-resilient-technology-rainfed-areas",
     description:
-      "Hourly landslide risk prediction for Indian terrain combining NWP reanalysis, GraphCast atmospheric forecasts, and synthetic minority oversampling. Demonstrates that physics-informed feature engineering closes the gap where labeled events are rare.",
-    tags: ["ML", "Geospatial", "Climate", "Feature Engineering"],
-    year: "2025",
-    links: {
-      github: "https://github.com/arhambhansali/landsight",
-    },
+      "Data analysis and scraping work with PoCRA, a World Bank–aided Project on Climate Resilient Agriculture in Maharashtra. Focused on evaluating water-saving and micro-irrigation practices across rainfed farming regions.",
+    tags: ["Data Analysis", "Climate", "Agriculture"],
+    year: "2023",
     featured: true,
   },
   {
-    title: "Low-Power Neural Signal Acquisition for BCI",
-    slug: "low-power-neural-acquisition",
+    title: "Biological Lifespan of Humans and the Influence of Growth Parameters and Temperature",
+    slug: "lifespan-growth-temperature",
     description:
-      "Hardware-software co-design of a wearable EEG front-end targeting sub-mW per channel operation while preserving signal fidelity for motor-imagery classification. Focuses on noise budgeting, ADC choice, and firmware data paths.",
-    tags: ["Neurotech", "Analog Design", "Embedded", "BCI"],
-    year: "2025",
-    links: {
-      github: "https://github.com/arhambhansali/neural-interface",
-    },
+      "An unpublished study from the Research Science Institute (RSI) under Prof. James Michaelson of Harvard Medical School, modeling how temperature affects lifespan through Life History Theory and a Binary Cellular Biology framework.",
+    tags: ["Modeling", "Biology", "Unpublished"],
+    year: "2023",
     featured: true,
   },
   {
-    title: "State-of-Charge Estimation via Extended Kalman Filter",
-    slug: "soc-ekf",
+    title: "Carbon Capture, Utilization, and Storage (CCUS) Report",
+    slug: "ccus-report",
     description:
-      "Recursive SoC estimator for Li-ion cells using an equivalent-circuit model and an EKF. Benchmarked against Coulomb counting on dynamic drive cycles; achieves under 2% RMS error across temperature extremes.",
-    tags: ["Control Systems", "Power Electronics", "Kalman Filter", "C"],
-    year: "2024",
-    links: {},
+      "A policy and technical report written during an internship at the State Climate Action Cell, Maharashtra, India, surveying carbon capture, utilization, and storage approaches relevant to state-level climate strategy.",
+    tags: ["Climate Policy", "Report"],
+    year: "2023",
     featured: false,
   },
 ];

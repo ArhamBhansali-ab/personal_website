@@ -8,30 +8,29 @@ const navItems = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/research", label: "Research" },
+  { href: "/photography", label: "Photography" },
   { href: "/blog", label: "Blog" },
-  { href: "/resume", label: "Resume" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-neutral-200 bg-[#fafaf9]/90 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 border-b border-brand-border bg-brand-bg/90 backdrop-blur-sm">
       <div className="max-w-container mx-auto px-6 flex items-center justify-between h-14">
         <Link
           href="/"
-          className="text-sm font-medium text-neutral-900 hover:opacity-60 transition-opacity"
+          className="font-serif text-sm font-medium text-brand-text hover:text-brand-accent transition-colors"
         >
           Arham Bhansali
         </Link>
 
-        <div className="hidden md:flex items-center gap-7 text-sm text-neutral-500">
+        <div className="hidden md:flex items-center gap-7 text-sm text-brand-text-secondary">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="hover:text-neutral-900 transition-colors"
+              className="link-squiggle hover:text-brand-accent transition-colors"
             >
               {item.label}
             </Link>
@@ -39,7 +38,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden p-1 text-neutral-500 hover:text-neutral-900 transition-colors"
+          className="md:hidden p-1 text-brand-text-secondary hover:text-brand-accent transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -48,12 +47,12 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-neutral-200 bg-[#fafaf9] px-6 py-4 flex flex-col gap-4 text-sm text-neutral-600">
+        <div className="md:hidden border-t border-brand-border bg-brand-bg px-6 py-4 flex flex-col gap-4 text-sm text-brand-text-secondary">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="hover:text-neutral-900 transition-colors"
+              className="hover:text-brand-accent transition-colors"
               onClick={() => setOpen(false)}
             >
               {item.label}
