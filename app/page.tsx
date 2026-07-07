@@ -4,6 +4,7 @@ import Connections from "@/components/Connections";
 import Blob from "@/components/Blob";
 import { site } from "@/content/site";
 import { projects, Project } from "@/content/projects";
+import { research, Research } from "@/content/research";
 
 export const metadata = {
   title: "Home",
@@ -29,8 +30,29 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
   );
 }
 
+function ResearchRow({ item, index }: { item: Research; index: number }) {
+  return (
+    <Link
+      href={`/research/${item.slug}`}
+      className={`group flex gap-6 py-5 border-b border-brand-border last:border-0 ${
+        index % 2 === 0 ? "tilt-hover" : "tilt-hover-alt"
+      }`}
+    >
+      <span className="font-mono text-xs text-brand-text-muted w-10 shrink-0 pt-1">
+        {item.year}
+      </span>
+      <div className="flex-1 min-w-0">
+        <span className="font-serif text-lg text-brand-text link-squiggle group-hover:text-brand-accent">
+          {item.title}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export default function Home() {
   const featured = projects.filter((p) => p.featured).slice(0, 4);
+  const featuredResearch = research.filter((r) => r.featured).slice(0, 2);
 
   return (
     <div>
@@ -59,21 +81,44 @@ export default function Home() {
 
       <section className="py-12 border-t border-brand-border">
         <Container>
-          <p className="font-script text-2xl text-brand-accent mb-6">
-            a few things i&apos;ve built
-          </p>
-          <div>
-            {featured.map((project, i) => (
-              <WorkRow key={project.slug} project={project} index={i} />
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link
-              href="/projects"
-              className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
-            >
-              All projects →
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+            <div>
+              <p className="font-script text-2xl text-brand-accent mb-6">
+                a few things i&apos;ve built
+              </p>
+              <div>
+                {featured.map((project, i) => (
+                  <WorkRow key={project.slug} project={project} index={i} />
+                ))}
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/projects"
+                  className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
+                >
+                  All projects →
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <p className="font-script text-2xl text-brand-accent mb-6">
+                ...and a few things i&apos;ve researched
+              </p>
+              <div>
+                {featuredResearch.map((item, i) => (
+                  <ResearchRow key={item.slug} item={item} index={i} />
+                ))}
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/research"
+                  className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
+                >
+                  All research →
+                </Link>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

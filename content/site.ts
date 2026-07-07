@@ -6,10 +6,10 @@ export const site = {
     "Electrical & Computer Engineering / Physics student at Duke. I build neurotech, embedded systems, and ML for signal-driven product experiences.",
   socials: {
     email: "arhambhansali1@gmail.com",
-    linkedin: "https://linkedin.com/in/arhambhansali",
-    instagram: "https://instagram.com/arhambhansali",
-    x: "https://x.com/arhambhansali",
-    github: "https://github.com/arhambhansali",
+    linkedin: "https://www.linkedin.com/in/arham-bhansali/",
+    instagram: "https://www.instagram.com/arhambhansali_ab/",
+    x: "https://x.com/arhambhansali07",
+    github: "https://github.com/ArhamBhansali-ab",
     scholar: "https://scholar.google.com/citations?user=XZ0I5rkAAAAJ&hl=en",
   },
 };
