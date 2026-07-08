@@ -32,3 +32,5 @@ export const blogPosts: BlogPost[] = [
       "This note covers the structure of the lifespan model, how temperature enters the binary cellular biology framework, and what the equations imply for biological resilience under climate stress.",
   },
 ];
+
+
