@@ -15,7 +15,7 @@ export default function BlogPage() {
           Blog
         </h1>
         <p className="text-brand-text-secondary">
-          Got lazy...but come back soon!.
+          Coming soon!.
         </p>
       </div>
     </Container>
