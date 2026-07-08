@@ -57,16 +57,17 @@ body::before {
 }
 
 @layer utilities {
-  .tilt-hover {
+  .tilt-hover,
+  .tilt-hover-alt {
     transition: transform 200ms ease;
   }
 
   .tilt-hover:hover {
-    transform: rotate(-1.5deg) translateY(-2px);
+    transform: rotate(-0.6deg) translateY(-2px);
   }
 
   .tilt-hover-alt:hover {
-    transform: rotate(1.5deg) translateY(-2px);
+    transform: rotate(0.6deg) translateY(-2px);
   }
 }
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import Tag from "@/components/Tag";
@@ -63,9 +64,31 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
                   Paper →
                 </a>
               )}
+              {project.links.post && (
+                <a
+                  href={project.links.post}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-squiggle text-brand-text-secondary hover:text-brand-accent transition-colors"
+                >
+                  Post →
+                </a>
+              )}
             </div>
           )}
         </div>
+
+        {project.coverImage && (
+          <div className="mb-10 overflow-hidden rounded-lg border border-brand-border">
+            <Image
+              src={project.coverImage}
+              alt={project.title}
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+            />
+          </div>
+        )}
 
         <div className="border-t border-brand-border pt-10">
           <section>

@@ -33,7 +33,7 @@ export default function ProjectCard({
       <span className="font-mono text-xs text-brand-text-muted w-10 shrink-0">
         {item.year}
       </span>
-      <h3 className="font-serif text-lg text-brand-text link-squiggle group-hover:text-brand-accent">
+      <h3 className="font-serif text-lg text-brand-text group-hover:text-brand-accent">
         {item.title}
       </h3>
     </Link>

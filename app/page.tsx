@@ -22,7 +22,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
         {project.year}
       </span>
       <div className="flex-1 min-w-0">
-        <span className="font-serif text-lg text-brand-text link-squiggle group-hover:text-brand-accent">
+        <span className="font-serif text-lg text-brand-text group-hover:text-brand-accent">
           {project.title}
         </span>
       </div>
@@ -42,7 +42,7 @@ function ResearchRow({ item, index }: { item: Research; index: number }) {
         {item.year}
       </span>
       <div className="flex-1 min-w-0">
-        <span className="font-serif text-lg text-brand-text link-squiggle group-hover:text-brand-accent">
+        <span className="font-serif text-lg text-brand-text group-hover:text-brand-accent">
           {item.title}
         </span>
       </div>
@@ -60,18 +60,25 @@ export default function Home() {
         <Blob className="absolute -top-16 -right-24 w-80 h-80 text-brand-accent-tint opacity-60 blur-2xl pointer-events-none" />
         <Container>
           <div className="relative">
-            <h1 className="font-script text-5xl text-brand-accent mb-1">
+            <h1 className="font-serif text-5xl text-brand-accent mb-1">
               hi, i&apos;m
             </h1>
-            <p className="font-script text-6xl text-brand-text">
+            <p className="font-serif text-6xl text-brand-text">
               Arham Bhansali
             </p>
             <p className="mt-2 text-brand-text-secondary">
               ECE + Physics · Duke University
             </p>
-            <p className="mt-6 max-w-xl text-base text-brand-text-secondary leading-relaxed">
-              {site.bioShort}
-            </p>
+            {site.bioLong.map((paragraph, i) => (
+              <p
+                key={i}
+                className={`max-w-xl text-base text-brand-text-secondary leading-relaxed ${
+                  i === 0 ? "mt-6" : "mt-4"
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
             <div className="mt-8">
               <Connections />
             </div>
@@ -84,7 +91,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
             <div>
               <p className="font-script text-2xl text-brand-accent mb-6">
-                a few things i&apos;ve built
+                things i&apos;ve built...
               </p>
               <div>
                 {featured.map((project, i) => (
@@ -103,7 +110,7 @@ export default function Home() {
 
             <div>
               <p className="font-script text-2xl text-brand-accent mb-6">
-                ...and a few things i&apos;ve researched
+                ...and my research
               </p>
               <div>
                 {featuredResearch.map((item, i) => (
