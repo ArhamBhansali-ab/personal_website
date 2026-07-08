@@ -62,9 +62,11 @@ export default function ResearchDetail({ params }: { params: { slug: string } })
             <h2 className="text-sm uppercase tracking-widest text-brand-text-muted mb-3">
               Overview
             </h2>
-            <p className="text-base text-brand-text-secondary leading-relaxed">
-              {item.description}
-            </p>
+            <div className="space-y-4 text-base text-brand-text-secondary leading-relaxed">
+              {item.description.map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
           </section>
         </div>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 type CardItem = {
   title: string;
   slug: string;
-  description: string;
+  description: string[];
   tags: string[];
   year: string;
   links?: {
