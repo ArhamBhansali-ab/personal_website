@@ -19,9 +19,9 @@ export const site = {
     github: "https://github.com/ArhamBhansali-ab",
     scholar: "https://scholar.google.com/citations?user=XZ0I5rkAAAAJ&hl=en",
   },
-  // heroImage: place a high-resolution head/portrait in public/images/hero-head.jpg
+  // heroImage: place a high-resolution head/portrait in public/images/projects/hero-head.jpg
   // or set this to an external URL. If you want me to fetch and add an image,
   // tell me which source to use and I'll add it to /public/images.
-  heroImage: "/images/hero-head.jpg",
+  heroImage: "/images/projects/hero-head.jpg",
 };
 
