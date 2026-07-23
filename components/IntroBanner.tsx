@@ -1,30 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { site } from "@/content/site";
 
 export default function IntroBanner() {
   const [dismissed, setDismissed] = useState(false);
   const [phase, setPhase] = useState("flash");
+  const lastY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     const t1 = window.setTimeout(() => setPhase("slam"), 250);
     const t2 = window.setTimeout(() => setPhase("settled"), 900);
 
-    const onScroll = () => {
-      if (window.scrollY > 60) setDismissed(true);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          // hide when scrolling down past a threshold, show when scrolling up
+          if (currentY > lastY.current && currentY > 100) {
+            setDismissed(true);
+          } else if (currentY < lastY.current) {
+            setDismissed(false);
+          }
+          lastY.current = currentY;
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const jp = "アルハム・バンサリ";
   const en = "WELCOME TO THE WEBSITE OF ARHAM BHANSALI";
+
+  const hero = site.heroImage || "/images/hero-head.jpg";
 
   return (
     <div
@@ -34,19 +52,10 @@ export default function IntroBanner() {
       <div className="speed-lines" />
       <div className={`flash ${phase !== "flash" ? "flash--out" : ""}`} />
 
-      <svg
-        className={`silhouette ${phase !== "flash" ? "silhouette--in" : ""}`}
-        viewBox="0 0 320 420"
-        aria-hidden="true"
-      >
-        <g fill="#0d0d0f" stroke="#d85a30" strokeWidth="1.5">
-          <path d="M185 116c-12-10-29-16-46-16-20 0-39 8-52 23-14 15-21 35-21 56 0 23 10 44 26 58 13 11 31 17 48 17 14 0 28-3 40-10 19-10 34-27 41-47 7-20 7-42-2-61-6-13-16-24-34-20z" />
-          <path d="M188 116c-15-4-29 0-39 9-10 8-16 20-16 33 0 10 4 20 10 28 6 8 15 12 25 12 13 0 27-6 36-16 8-9 13-21 13-33 0-10-3-20-8-28-4-7-10-11-20-5z" opacity="0.9" />
-          <path d="M152 178c-6 10-8 23-7 34 2 17 11 32 25 43 6 4 13 8 20 9 16 2 32-5 42-18 5-7 8-14 9-22 1-12-3-24-11-33-7-8-17-12-28-13-12 0-24 4-35 10-3 2-5 3-8 4-3 0-6-2-7-4z" opacity="0.7" />
-          <path d="M161 118c2-18 11-32 24-42 5-4 10-7 16-10 7-3 15-4 22-3 8 2 16 7 21 14 5 6 8 13 8 21 0 10-4 19-12 25-8 7-19 10-29 10-11 0-22-2-31-8-5-3-8-8-10-13-1-3-2-5-3-7z" />
-          <path d="M146 167c-7 4-12 11-15 18-3 8-4 17-3 26 2 11 7 21 16 28 10 8 24 11 37 9 11-2 21-8 27-16 5-8 7-17 4-25-3-8-10-14-18-18-8-4-16-5-24-5-8 0-16 2-24 6z" opacity="0.78" />
-        </g>
-      </svg>
+      <div className={`silhouette ${phase !== "flash" ? "silhouette--in" : ""}`} aria-hidden>
+        {/* Use a high-resolution image if present; it will be clipped to head-area */}
+        <img src={hero} alt="hero head" onError={(e)=>{(e.target as HTMLImageElement).style.opacity='0';}} />
+      </div>
 
       <div className="intro-banner__inner">
         <p className={`intro-banner__jp ${phase !== "flash" ? "intro-banner__jp--slam" : ""}`}>
@@ -116,16 +125,31 @@ export default function IntroBanner() {
           top: 50%;
           transform: translateY(-50%) translateX(140px);
           height: min(66vh, 420px);
-          width: auto;
+          width: min(40vw, 420px);
           z-index: 1;
           opacity: 0;
-          filter: drop-shadow(0 0 32px rgba(216, 90, 48, 0.3));
+          filter: drop-shadow(0 10px 40px rgba(0,0,0,0.6));
           transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+          overflow: visible;
         }
 
         .silhouette--in {
           opacity: 1;
           transform: translateY(-50%) translateX(0);
+        }
+
+        .silhouette img {
+          display: block;
+          height: 100%;
+          width: auto;
+          object-fit: cover;
+          object-position: right center;
+          transform: translateX(10%);
+          filter: saturate(0.95) contrast(1.02) brightness(0.98);
+          border-radius: 6px;
+          box-shadow: 0 30px 80px rgba(2,2,2,0.6), inset 0 -40px 80px rgba(216,90,48,0.04);
+          -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 22%, black 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, black 22%, black 100%);
         }
 
         .intro-banner__inner {
