@@ -39,8 +39,7 @@ export default function IntroBanner() {
     };
   }, []);
 
-  const jp = "アルハム・バンサリ";
-  const en = "WELCOME TO THE WEBSITE OF ARHAM BHANSALI";
+  const en = "WELCOME";
 
   const hero = site.heroImage || "/images/hero-head.jpg";
   const [imageLoaded, setImageLoaded] = useState(true);
@@ -103,9 +102,6 @@ export default function IntroBanner() {
       </div>
 
       <div className="intro-banner__inner">
-        <p className={`intro-banner__jp ${phase !== "flash" ? "intro-banner__jp--slam" : ""}`}>
-          {jp}
-        </p>
         <p className={`intro-banner__en ${phase === "settled" ? "intro-banner__en--in" : ""}`}>
           {en}
         </p>
@@ -164,49 +160,22 @@ export default function IntroBanner() {
           }
         }
 
-        .silhouette {
-          position: absolute;
-          right: 3%;
-          top: 50%;
-          transform: translateY(-50%) translateX(140px);
-          height: min(66vh, 420px);
-          width: min(40vw, 420px);
-          z-index: 1;
+        .intro-banner__en {
+          margin: 0;
+          font-size: clamp(3.5rem, 12vw, 9rem);
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ffffff;
           opacity: 0;
-          filter: drop-shadow(0 10px 40px rgba(0,0,0,0.6));
-          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-          overflow: visible;
+          transform: translateY(-12px) scale(1.02);
+          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2,0.9,0.3,1.2);
+          text-shadow: 0 12px 48px rgba(0,0,0,0.6), 0 0 36px rgba(216,90,48,0.08);
         }
-
-        .silhouette--in {
+        .intro-banner__en--in {
           opacity: 1;
-          transform: translateY(-50%) translateX(0);
+          transform: translateY(0) scale(1);
         }
-
-        .silhouette img {
-            display: block;
-            height: 100%;
-            width: auto;
-            object-fit: cover;
-            object-position: right center;
-            transform: translateX(0%);
-            filter: saturate(1.02) contrast(1.06) brightness(1.02) drop-shadow(0 18px 40px rgba(0,0,0,0.6));
-            border-radius: 6px;
-            box-shadow: 0 30px 80px rgba(2,2,2,0.6), inset 0 -40px 80px rgba(216,90,48,0.04);
-            /* crop left side a bit to focus on the head without hiding image */
-            clip-path: inset(0 0 0 12% round 8px);
-        }
-
-        .intro-banner__inner {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          width: min(92vw, 720px);
-          padding: 0 1.5rem;
-        }
-
-        .intro-banner__jp {
-          font-size: clamp(2.4rem, 7vw, 5.1rem);
           font-weight: 700;
           letter-spacing: 0.04em;
           color: #fff;
