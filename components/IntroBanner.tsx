@@ -176,8 +176,8 @@ export default function IntroBanner() {
             filter: saturate(1.02) contrast(1.06) brightness(1.02) drop-shadow(0 18px 40px rgba(0,0,0,0.6));
             border-radius: 6px;
             box-shadow: 0 30px 80px rgba(2,2,2,0.6), inset 0 -40px 80px rgba(216,90,48,0.04);
-            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 100%);
-            mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 100%);
+            /* crop left side a bit to focus on the head without hiding image */
+            clip-path: inset(0 0 0 12% round 8px);
         }
 
         .intro-banner__inner {
