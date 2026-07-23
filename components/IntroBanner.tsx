@@ -44,6 +44,26 @@ export default function IntroBanner() {
 
   const hero = site.heroImage || "/images/hero-head.jpg";
   const [imageLoaded, setImageLoaded] = useState(true);
+  const [imageReachable, setImageReachable] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch(hero, { method: "HEAD" });
+        if (!mounted) return;
+        setImageReachable(res.ok);
+        if (!res.ok) console.warn("IntroBanner: hero image not reachable", hero, res.status);
+      } catch (err) {
+        if (!mounted) return;
+        setImageReachable(false);
+        console.warn("IntroBanner: error fetching hero image", hero, err);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, [hero]);
 
   return (
     <div
@@ -55,11 +75,12 @@ export default function IntroBanner() {
 
       <div className={`silhouette ${phase !== "flash" ? "silhouette--in" : ""}`} aria-hidden>
         {/* Render only the high-res image. If it fails to load, render nothing. */}
-        {imageLoaded && (
+        {imageReachable !== false && imageLoaded && (
           <img
             src={hero}
             alt="hero head"
             onError={() => setImageLoaded(false)}
+            style={{ border: "1px solid rgba(255,255,255,0.03)" }}
           />
         )}
       </div>
