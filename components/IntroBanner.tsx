@@ -105,7 +105,7 @@ export default function IntroBanner() {
         <p className={`intro-banner__en ${phase === "settled" ? "intro-banner__en--in" : ""}`}>
           {en}
         </p>
-        <div className="intro-banner__hint">scroll to enter ↓</div>
+        <div className="intro-banner__hint">scroll down ↓</div>
       </div>
 
       <style jsx>{`
