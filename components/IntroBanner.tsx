@@ -43,7 +43,7 @@ export default function IntroBanner() {
   const en = "WELCOME TO THE WEBSITE OF ARHAM BHANSALI";
 
   const hero = site.heroImage || "/images/hero-head.jpg";
-  const [imgError, setImgError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(true);
 
   return (
     <div
@@ -54,26 +54,13 @@ export default function IntroBanner() {
       <div className={`flash ${phase !== "flash" ? "flash--out" : ""}`} />
 
       <div className={`silhouette ${phase !== "flash" ? "silhouette--in" : ""}`} aria-hidden>
-        {/* Use a high-resolution image if present; fallback to SVG if missing */}
-        {!imgError ? (
+        {/* Render only the high-res image. If it fails to load, render nothing. */}
+        {imageLoaded && (
           <img
             src={hero}
             alt="hero head"
-            onError={() => setImgError(true)}
+            onError={() => setImageLoaded(false)}
           />
-        ) : (
-          <svg viewBox="0 0 320 420" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="g" x1="0" x2="1">
-                <stop offset="0%" stopColor="#0b0b0b" />
-                <stop offset="100%" stopColor="#151515" />
-              </linearGradient>
-            </defs>
-            <g fill="url(#g)">
-              <path d="M185 116c-12-10-29-16-46-16-20 0-39 8-52 23-14 15-21 35-21 56 0 23 10 44 26 58 13 11 31 17 48 17 14 0 28-3 40-10 19-10 34-27 41-47 7-20 7-42-2-61-6-13-16-24-34-20z" />
-              <path d="M161 118c2-18 11-32 24-42 5-4 10-7 16-10 7-3 15-4 22-3 8 2 16 7 21 14 5 6 8 13 8 21 0 10-4 19-12 25-8 7-19 10-29 10-11 0-22-2-31-8-5-3-8-8-10-13-1-3-2-5-3-7z" opacity="0.9" />
-            </g>
-          </svg>
         )}
       </div>
 
