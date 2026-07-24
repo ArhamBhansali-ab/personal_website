@@ -17,10 +17,10 @@ export default function IntroBanner() {
       const currentY = window.scrollY;
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
-          // hide when scrolling down past a threshold, show when scrolling up
+          // only reveal the intro banner again when the user is back at the top
           if (currentY > lastY.current && currentY > 100) {
             setDismissed(true);
-          } else if (currentY < lastY.current) {
+          } else if (currentY <= 0) {
             setDismissed(false);
           }
           lastY.current = currentY;
@@ -44,22 +44,17 @@ export default function IntroBanner() {
   const hero = site.heroImage || "/images/hero-head.jpg";
   const [imageLoaded, setImageLoaded] = useState(true);
   const [imageReachable, setImageReachable] = useState<boolean | null>(null);
-  const [showDebug, setShowDebug] = useState(false);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
       try {
-        console.log("IntroBanner: checking hero image", hero);
         const res = await fetch(hero, { method: "HEAD" });
         if (!mounted) return;
         setImageReachable(res.ok);
-        console.log("IntroBanner: HEAD result", res.status, res.ok);
-        if (!res.ok) console.warn("IntroBanner: hero image not reachable", hero, res.status);
-      } catch (err) {
+      } catch {
         if (!mounted) return;
         setImageReachable(false);
-        console.warn("IntroBanner: error fetching hero image", hero, err);
       }
     })();
     return () => {
@@ -81,23 +76,9 @@ export default function IntroBanner() {
           <img
             src={hero}
             alt="hero head"
-            onError={(e) => {
-              console.warn("IntroBanner: img onError", hero, e);
-              setImageLoaded(false);
-            }}
-            onLoad={() => console.log("IntroBanner: img loaded", hero)}
+            onError={() => setImageLoaded(false)}
             style={{ border: "1px solid rgba(255,255,255,0.03)" }}
           />
-        )}
-
-        {/* Debug overlay, enabled with ?debugBanner=1 or toggled via click */}
-        {showDebug && (
-          <div className="intro-banner__debug" onClick={() => setShowDebug(false)}>
-            <div>hero: {hero}</div>
-            <div>reachable: {String(imageReachable)}</div>
-            <div>loaded: {String(imageLoaded)}</div>
-            <div>Click to hide</div>
-          </div>
         )}
       </div>
 
@@ -229,20 +210,6 @@ export default function IntroBanner() {
           letter-spacing: 0.16em;
           z-index: 2;
           animation: bob 1.6s ease-in-out infinite;
-        }
-
-        .intro-banner__debug {
-          position: absolute;
-          right: 1rem;
-          top: 1rem;
-          z-index: 60;
-          background: rgba(0,0,0,0.6);
-          color: #fff;
-          padding: 0.5rem 0.75rem;
-          font-size: 12px;
-          border-radius: 6px;
-          text-align: right;
-          line-height: 1.3;
         }
 
         @keyframes bob {
