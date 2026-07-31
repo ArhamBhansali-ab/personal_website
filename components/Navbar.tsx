@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { site } from "@/content/site";
 
 const navItems = [
   { href: "/projects", label: "Projects" },
@@ -35,14 +34,6 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-          <a
-            href={site.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-squiggle hover:text-brand-accent transition-colors"
-          >
-            Resume
-          </a>
         </div>
 
         <button
@@ -66,15 +57,6 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-          <a
-            href={site.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-brand-accent transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Resume
-          </a>
         </div>
       )}
     </nav>
