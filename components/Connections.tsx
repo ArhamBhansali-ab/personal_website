@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
 
 export default function Connections() {
-  const { socials, resume } = site;
+  const { socials } = site;
   const links = [
     { label: "Email", href: `mailto:${socials.email}` },
     { label: "LinkedIn", href: socials.linkedin },
@@ -9,7 +9,6 @@ export default function Connections() {
     { label: "X", href: socials.x },
     { label: "GitHub", href: socials.github },
     { label: "Scholar", href: socials.scholar },
-    { label: "Resume", href: resume },
   ];
 
   return (
