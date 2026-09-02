@@ -2,7 +2,6 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import Connections from "@/components/Connections";
 import Blob from "@/components/Blob";
-import IntroBanner from "@/components/IntroBanner";
 import { site } from "@/content/site";
 import { projects, Project } from "@/content/projects";
 import { research, Research } from "@/content/research";
@@ -57,7 +56,6 @@ export default function Home() {
 
   return (
     <div>
-      <IntroBanner />
       <section className="relative pt-20 pb-16 overflow-hidden">
         <Blob className="absolute -top-16 -right-24 w-80 h-80 text-brand-accent-tint opacity-60 blur-2xl pointer-events-none" />
         <Container>

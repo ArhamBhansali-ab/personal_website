@@ -200,6 +200,40 @@ export default function IntroBanner() {
           transform: translateY(0);
         }
 
+        .silhouette {
+          position: absolute;
+          right: -2%;
+          top: 50%;
+          width: min(56vw, 760px);
+          height: min(82vh, 720px);
+          transform: translateY(-50%);
+          z-index: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          opacity: 0.98;
+        }
+
+        .silhouette::before {
+          content: "";
+          position: absolute;
+          inset: -2px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          border-radius: 2rem;
+          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 36px rgba(255, 255, 255, 0.05);
+          pointer-events: none;
+        }
+
+        .silhouette img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center right;
+          filter: brightness(1.12) contrast(1.16) saturate(1.08);
+          transform: translateZ(0);
+        }
+
         .intro-banner__hint {
           position: absolute;
           bottom: -3rem;
