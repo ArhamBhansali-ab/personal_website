@@ -35,6 +35,26 @@ export default function Hero({
         <Orb nodes={nodes} />
       </div>
 
+      {/* phones: the orb only has room for numbers, so the names sit in a key underneath */}
+      <nav aria-label="Key to the points on the orb" className="pb-8 sm:hidden">
+        <ol className="grid grid-cols-2 gap-x-5 border-t border-line">
+          {nodes.map((node) => (
+            <li key={node.href} className="border-b border-line">
+              <Link href={node.href} className="flex items-baseline gap-2.5 py-3">
+                <span
+                  className={`font-mono text-[0.6875rem] tracking-[0.12em] ${
+                    node.kind === "project" ? "text-accent" : "text-muted"
+                  }`}
+                >
+                  {node.index}
+                </span>
+                <span className="font-serif text-lg leading-tight text-fg">{node.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
       <div className="flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
         <p className="max-w-md text-[0.9375rem] leading-relaxed text-muted">
           {statement}
