@@ -1,35 +1,33 @@
-import type { Metadata } from "next";
-import { Inter, Fraunces, Caveat, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { site } from "@/content/site";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Providers from "@/components/motion/Providers";
+import Nav from "@/components/site/Nav";
+import Footer from "@/components/site/Footer";
+import RebuildNotice from "@/components/site/RebuildNotice";
 import PersonJsonLd from "@/components/PersonJsonLd";
 
-const inter = Inter({
+const serif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-sans",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "400",
   style: ["normal", "italic"],
   variable: "--font-serif",
+  display: "swap",
 });
 
-const caveat = Caveat({
+const sans = Inter_Tight({
   subsets: ["latin"],
-  weight: ["500", "600"],
-  variable: "--font-script",
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -46,6 +44,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b0b0b",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -56,13 +62,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} ${caveat.variable} ${jetbrainsMono.variable}`}
+      data-accent={site.accent}
+      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body className="min-h-screen bg-brand-bg text-brand-text font-sans">
+      <body className="font-sans">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-3 focus:py-2 focus:text-sm"
+        >
+          Skip to content
+        </a>
         <PersonJsonLd />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          {site.rebuilding && <RebuildNotice />}
+          <Nav />
+          <main id="main">{children}</main>
+          <Footer />
+        </Providers>
         <Analytics />
       </body>
     </html>

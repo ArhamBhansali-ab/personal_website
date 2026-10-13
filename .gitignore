@@ -9,7 +9,7 @@
 /coverage
 
 # next.js
-/.next/
+/.next
 /out/
 
 # production
@@ -33,3 +33,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# kept out of iCloud sync (node_modules and .next are symlinks to these)
+*.nosync
+
+# raw photos; `npm run photos` writes the processed versions into /public
+/photos-raw

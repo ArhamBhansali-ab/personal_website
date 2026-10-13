@@ -1,0 +1,181 @@
+---
+title: Foldable Electric Dirtbike
+year: "2026"
+order: 2
+featured: true
+summary: A foldable electric dirt bike built from flat aluminum plate. I designed and wired the electrical system and helped weld the 74V pack.
+tags: [hardware, power electronics, KiCad]
+context: Personal project
+role: Electrical system and battery pack
+duration: 3 months (Feb–Apr 2026)
+team: With Marco Schönert
+stack:
+  - KiCad
+  - 20s12p P42A 21700 pack
+  - Nucular P24F controller
+  - QS138 90H motor
+  - 72V to 12V DC-DC
+  - Spot welding
+  - CAD
+cover:
+  src: /work/motorbike/cover.jpg
+  alt: The foldable electric dirt bike standing in a parking lot, bare aluminum frame with the battery bay and rear swingarm visible
+links:
+  post: https://x.com/arhambhansali07/status/2024980588990468127
+gallery:
+  - src: /work/motorbike/cover.jpg
+    alt: The finished bike in a parking lot
+    caption: "The bike: flat aluminum plate frame, battery bay in the middle, swingarm at the back."
+  - src: /work/motorbike/cad.jpg
+    alt: CAD model of the whole bike showing the plate frame, battery box, two-stage chain drive and swingarm
+    caption: "The whole bike in CAD. The two sprockets by the swingarm pivot are the jackshaft."
+  - src: /work/motorbike/pack-build.jpg
+    alt: The battery pack on a bench mid-build, with thick red and black cables and a hand-drawn danger high-voltage sign on top
+    caption: "The pack mid-build, with the sign we made for it."
+  - src: /work/motorbike/pack-cad.jpg
+    alt: CAD of the battery enclosure with two stacked modules of cylindrical cells
+    caption: "Pack enclosure prototype: two 10s12p modules stacked."
+  - src: /work/motorbike/pack-cell-layout.jpg
+    alt: Top view of one battery module's honeycomb cell layout with one parallel group of twelve cells highlighted
+    caption: "One module from above. The highlighted cells are a single parallel group of twelve."
+  - src: /work/motorbike/pack-current-path.jpg
+    alt: Two diagrams of current flow through the pack, one with terminals on the same end and one with the path routed diagonally
+    caption: "Current path. Left: the cells nearest the terminals do most of the work. Right: routed diagonally, all cells drain similarly."
+  - src: /work/motorbike/full-schematic.jpg
+    alt: The complete KiCad schematic combining the high-voltage, motor, low-voltage control and 12V accessory harnesses
+    caption: "The top-level schematic: all four subsystems merged. We wired the bike from this."
+  - src: /work/motorbike/hv-harness.jpg
+    alt: KiCad schematic of the high-voltage harness from battery through the main fuse to the controller and DC-DC converter
+    caption: "System 1, high voltage: battery, main fuse, HV bus, then the controller and the DC-DC."
+  - src: /work/motorbike/motor-hall-harness.jpg
+    alt: KiCad schematic of the three motor phase cables and six Hall sensor wires between the controller and the motor
+    caption: "System 2: three phase cables and the Hall sensor loom between the P24F and the QS138."
+  - src: /work/motorbike/accessory-harness.jpg
+    alt: KiCad schematic of the 12V accessory harness with fuse box, headlight, indicators, horn and brake light
+    caption: "System 4, 12V accessories: fuse box, lights, indicators, horn, brake-light switch."
+---
+
+## TL;DR
+
+A foldable electric dirt bike I built with my friend Marco Schönert over about three months. I worked on the electrical system: I split it into four subsystems, drew each as its own KiCad harness, merged them into one schematic, and wired the bike from it. I also worked on spot-welding the pack, a custom 20s12p battery of P42A 21700 cells: 74V nominal, about 3.7 kWh.
+
+## Why I built it
+
+We wanted a light, capable electric dirt bike designed around manufacturability rather than tradition. The frame is flat aluminum plate instead of tubing, so anyone with a CNC mill, a TIG welder and a press brake (or a SendCutSend order) could replicate it.
+
+It folds so that it fits in an elevator. It also looks cool, a bit like the bike from the movie Oblivion. The fold drove the rest of the design: the rear wheel pivots about the swingarm pivot, and that forced the jackshaft drivetrain described below.
+
+<Figure
+  src="/work/motorbike/cad.jpg"
+  alt="CAD model of the whole bike showing the plate frame, battery box, two-stage chain drive and swingarm"
+  caption="The whole bike in CAD: two parallel plates, the battery box between them, and the swingarm that folds."
+  aspect="4/3"
+/>
+
+## How it works
+
+### Sizing the battery
+
+The series count was set by the controller. The Nucular P24F has a 92V limit, and 22 cells in series peak at 92.4V, too close to that limit. 21s didn't divide cleanly into the pack geometry. 20s gives 74V nominal and 84V at full charge.
+
+The parallel count came from current. A 20 kW peak at 84V is about 238A. We derated each P42A to half its 45A rating, 22.5A per cell, which needs between 10 and 11 cells in parallel. We rounded up to 12p, the nearest count that suited the layout.
+
+We chose the P42A because it's cheap and widely available, cheaper than the P45B, and the 21700 format holds more than an 18650.
+
+### Building the pack
+
+The pack is two 10s12p modules stacked and joined in series. Parallel groups are spot-welded with two layers of 8 × 0.15 mm nickel strip. Series links are laser-cut 0.25 mm copper, because each link carries about 25A. A copper bus of about 9 mm² joins the two modules. The cover is 3D-printed in two parts, and the BMS is a 20s unit rated 150A continuous and 300A peak.
+
+<TwoUp caption="The enclosure in CAD, and the real thing on the bench.">
+  <Figure
+    src="/work/motorbike/pack-cad.jpg"
+    alt="CAD of the battery enclosure with two stacked modules of cylindrical cells"
+    aspect="4/3"
+  />
+  <Figure
+    src="/work/motorbike/pack-build.jpg"
+    alt="The battery pack on a bench mid-build, with thick red and black cables and a hand-drawn danger high-voltage sign on top"
+    aspect="4/3"
+  />
+</TwoUp>
+
+We routed the current path so the lowest-resistance route runs through most of the cells, which keeps the cells draining evenly. With both terminals on the same end, the cells nearest them get used quicker. Taking the path diagonally across the pack evens that out.
+
+<Figure
+  src="/work/motorbike/pack-current-path.jpg"
+  alt="Two diagrams of current flow through the pack, one with terminals on the same end and one with the path routed diagonally"
+  caption="Left: the cells at the top get used quicker. Right: all cells get drained similarly."
+/>
+
+### Four harnesses, one schematic
+
+I split the electrical system into four subsystems and drew each one as its own KiCad harness:
+
+1. **High-voltage distribution.** Pack, main fuse, HV bus, then the P24F controller and the 72V to 12V DC-DC converter.
+2. **Motor phase and Hall feedback** between the P24F and the QS138.
+3. **The controller's low-voltage I/O.** Key switch, throttle, regen brake, the four auxiliary inputs, and the Nucular display.
+4. **The 12V accessory system.** Fuse box, lights, indicators, horn, and the brake-light switch, with its own main fuse.
+
+<TwoUp caption="Systems 1 and 2: the high-voltage path, and the phase and Hall wiring to the motor.">
+  <Figure
+    src="/work/motorbike/hv-harness.jpg"
+    alt="KiCad schematic of the high-voltage harness from battery through the main fuse to the controller and DC-DC converter"
+  />
+  <Figure
+    src="/work/motorbike/motor-hall-harness.jpg"
+    alt="KiCad schematic of the three motor phase cables and six Hall sensor wires between the controller and the motor"
+  />
+</TwoUp>
+
+Then I merged them into one top-level schematic and wired the bike from it.
+
+<FullBleed
+  src="/work/motorbike/full-schematic.jpg"
+  alt="The complete KiCad schematic combining the high-voltage, motor, low-voltage control and 12V accessory harnesses"
+  caption="The full schematic. Every wire on the bike has a name here before it has a crimp."
+  aspect="16/10"
+/>
+
+### Drivetrain
+
+Power runs through the P24F into a QS138 motor and reaches the rear wheel through a two-stage reduction: 14T to 28T is 2:1, and 14T to 49T is 3.5:1, for 7:1 overall. We targeted 7:1 because acceleration matters more than top speed on a dirt bike. It gives about 453 Nm at the wheel by our spreadsheet.
+
+The sprockets are custom 4130 chromoly, milled from quarter-inch plate. The two jackshaft sprockets sit as close together as possible to minimize bending on the 1" chromoly shaft and the load on its bearings. The chain is plain 520 with no O-rings, which is easier to clean off-road.
+
+### Frame
+
+The frame is two parallel 6061 aluminum plates joined by bent, welded 5052 sheet metal, with a five-blade chromoly steel swingarm fabricated on a custom jig.
+
+### The numbers, and which are real
+
+The acceleration and weight figures are estimates, not measurements. Our spreadsheet puts 0–100 km/h at under 4 seconds, at roughly 70 kg for the bike alone.
+
+## Key decisions
+
+<Decisions>
+  <Decision title="A jackshaft on the pivot axis" rejected="A chain running straight from the motor to the wheel">
+    When the bike folds, the rear wheel swings about the swingarm pivot, and a direct chain would change length through that arc. Putting a jackshaft exactly on the pivot axis keeps both center distances fixed: motor to jackshaft, and jackshaft to wheel. The same geometry also removes chain growth through suspension travel.
+  </Decision>
+  <Decision title="Two stages to reach 7:1" rejected="One enormous rear sprocket">
+    Splitting the reduction into 2:1 and 3.5:1 gets to 7:1 with sprockets of a sensible size.
+  </Decision>
+  <Decision title="20 cells in series" rejected="22s, which peaks at 92.4V, and 21s, which didn't fit the pack geometry">
+    The P24F's limit is 92V. 20s tops out at 84V and leaves real margin.
+  </Decision>
+  <Decision title="Run each cell at half its rating" rejected="Fewer cells in parallel, each pushed harder">
+    Derating the P42A from 45A to 22.5A per cell is what set 12p.
+  </Decision>
+  <Decision title="Flat plate, not tubing" rejected="A traditional tube frame">
+    Anyone with a CNC mill, a TIG welder and a press brake, or a SendCutSend order, can replicate a plate frame.
+  </Decision>
+</Decisions>
+
+## What went wrong
+
+Once everything was wired up, getting the display to fire up from the battery pack took several attempts, and each cause was small.
+
+- The BMS was wired wrong. We bought it cheaply off Alibaba, so we were never sure how good it would be.
+- Resistance in the circuit was too low when we connected the pack, so there were pretty big sparks. It is a very big battery, after all.
+- Thick wire is annoying to work with.
+
+The other thing that needed care was managing the voltage each component saw, so we didn't fry anything: 84V at the pack, 12V for the accessories, 5V for the Hall sensors and throttle.

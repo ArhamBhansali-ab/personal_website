@@ -1,0 +1,80 @@
+---
+title: Celer Bio
+year: "2026"
+order: 4
+featured: true
+summary: An AI-powered data infrastructure layer that turns raw, messy multi-omics datasets into analysis-ready data, in hours instead of weeks.
+tags: [biotech, data infrastructure, AI]
+role: Co-founder
+duration: 6 months (Dec 2025 – May 2026)
+team: With Vageesh Nanduri, Ryan Razon, Aadi Bharadwaj and Vedant Iyer
+stack:
+  - GEO
+  - PRIDE
+  - Multi-omics
+cover:
+  src: /work/celer-bio/cover.jpg
+  alt: The Celer Bio interface, a search screen titled Discover Omics Datasets with GEO and PRIDE as data sources
+links:
+  post: https://x.com/arhambhansali07/status/2018845490905772072
+gallery:
+  - src: /work/celer-bio/search.jpg
+    alt: Celer Bio search screen titled Discover Omics Datasets, with a natural-language query typed in
+    caption: "Search GEO and PRIDE in natural language."
+  - src: /work/celer-bio/results.jpg
+    alt: Celer Bio results screen showing a retrieved GEO dataset with its samples, a data preview table and a job log
+    caption: "A retrieved dataset: samples detected, a preview of the expression matrix, and the job log alongside."
+---
+
+## TL;DR
+
+Celer Bio is building an AI-powered data infrastructure layer that retrieves, cleans, standardizes, and analyzes multi-omics biological data for academic labs and biotech companies. In short, it pre-processes multi-omics data. The objective is to transform raw, messy datasets into analysis-ready data and compress that process from weeks into hours.
+
+## The problem
+
+Over the last decade, advances in sequencing and high-throughput assays have caused an explosion in biological data generation. The infrastructure required to standardize and prepare this data has not kept pace.
+
+Researchers face several core issues:
+
+- Public and private multi-omics datasets are inconsistently formatted.
+- Metadata is incomplete, mislabeled, or non-standard.
+- Sample annotations vary across studies and repositories.
+- Reproducible pipelines must be manually assembled for each dataset.
+
+Public repositories such as GEO and PRIDE contain petabytes of transcriptomic, proteomic, and metabolomic data, yet researchers typically spend 2–4 weeks on data retrieval, cleaning, and harmonization before any analysis can begin. This slows publications, delays drug discovery, and limits the effectiveness of downstream AI models.
+
+Many wet-lab researchers lack the computational expertise or motivation to do this rigorously, often leading to shortcuts that compromise data quality and downstream results.
+
+<PullQuote>data preparation, not analysis, is the true bottleneck in biology.</PullQuote>
+
+After speaking with more than 100 academic researchers, biotech founders, and lab heads, that feedback was consistent.
+
+## How it works
+
+Celer follows a simple structure:
+
+1. **Retrieves** datasets from public and private repositories such as GEO and PRIDE.
+2. **Cleans and harmonizes** metadata.
+3. **Standardizes** formats across studies and modalities.
+4. **Assembles** reproducible analysis pipelines.
+5. **Outputs** structured, analysis-ready datasets with clear summaries.
+
+<Figure
+  src="/work/celer-bio/search.jpg"
+  alt="Celer Bio search screen titled Discover Omics Datasets, with a natural-language query typed in"
+  caption="It starts with a question in plain language, against GEO, PRIDE, or both."
+/>
+
+<Figure
+  src="/work/celer-bio/results.jpg"
+  alt="Celer Bio results screen showing a retrieved GEO dataset with its samples, a data preview table and a job log"
+  caption="What comes back: the dataset, its sample groups, and a preview of the matrix, ready to download or analyze."
+/>
+
+## Key decisions
+
+<Decisions>
+  <Decision title="Stay headless">
+    Celer Bio is intentionally headless. It sits between raw biological data and downstream tools, enabling seamless integration with the existing workflows, analysis platforms, and internal pipelines used by labs and pharma companies.
+  </Decision>
+</Decisions>

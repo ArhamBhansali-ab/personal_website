@@ -6,6 +6,8 @@ export interface BlogPost {
   tags: string[];
   excerpt: string;
   content: string;
+  /** drafts are listed but not linked; flip to true once the post has a real page */
+  published: boolean;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -19,6 +21,7 @@ export const blogPosts: BlogPost[] = [
       "How I turned daily landslide risk pipelines into an hourly AI system with synthetic events, GraphCast inputs, and terrain-aware modeling.",
     content:
       "LandSight started as a simple question: can a model update faster than today's disaster telemetry? In this post, I walk through dataset design, imbalance handling, and the tradeoffs that make an early-warning system practical for Indian terrain.",
+    published: false,
   },
   {
     title: "Notes from RSI: modeling lifespan and temperature sensitivity",
@@ -30,7 +33,8 @@ export const blogPosts: BlogPost[] = [
       "A concise notebook of the RSI project on temperature-driven lifespan models, from life-history theory to computational predictions.",
     content:
       "This note covers the structure of the lifespan model, how temperature enters the binary cellular biology framework, and what the equations imply for biological resilience under climate stress.",
+    published: false,
   },
 ];
 
-
+export const latestPosts = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));

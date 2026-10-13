@@ -1,134 +1,165 @@
 import Link from "next/link";
-import Container from "@/components/Container";
-import Connections from "@/components/Connections";
-import Blob from "@/components/Blob";
+import Hero from "@/components/home/Hero";
+import type { OrbNode } from "@/components/home/Orb";
+import WorkCard from "@/components/home/WorkCard";
+import PhotoStrip from "@/components/home/PhotoStrip";
+import SectionHeader from "@/components/site/SectionHeader";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { site } from "@/content/site";
-import { projects, Project } from "@/content/projects";
-import { research, Research } from "@/content/research";
+import { research } from "@/content/research";
+import { photos } from "@/content/photos";
+import { getFeaturedProjects, getProjects, type Project } from "@/lib/projects";
+import { resolveShot } from "@/lib/images";
 
 export const metadata = {
-  title: "Home",
+  title: { absolute: `${site.name} · projects, research and a playground` },
 };
 
-function WorkRow({ project, index }: { project: Project; index: number }) {
-  return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className={`group flex gap-6 py-5 border-b border-brand-border last:border-0 ${
-        index % 2 === 0 ? "tilt-hover" : "tilt-hover-alt"
-      }`}
-    >
-      <span className="font-mono text-xs text-brand-text-muted w-10 shrink-0 pt-1">
-        {project.year}
-      </span>
-      <div className="flex-1 min-w-0">
-        <span className="font-serif text-lg text-brand-text group-hover:text-brand-accent">
-          {project.title}
-        </span>
-      </div>
-    </Link>
-  );
+/** The orb's points: every featured project, then the other sections of the site. */
+function orbNodes(projects: Project[]): OrbNode[] {
+  const pages = [
+    { href: "/research", title: "Research", meta: "papers", summary: "Papers and reports, published and unpublished." },
+    { href: "/photography", title: "Playground", meta: "hobbies", summary: "Photography, DJing, guitar, and a bunch of sports." },
+  ];
+  return [
+    ...projects.map((project) => ({
+      href: `/projects/${project.slug}`,
+      title: project.title,
+      meta: project.status ? `${project.year} · ${project.status}` : project.year,
+      summary: project.summary,
+      kind: "project" as const,
+    })),
+    ...pages.map((page) => ({ ...page, kind: "page" as const })),
+  ].map((node, index) => ({ ...node, index: String(index + 1).padStart(2, "0") }));
 }
 
-function ResearchRow({ item, index }: { item: Research; index: number }) {
-  return (
-    <Link
-      href={`/research/${item.slug}`}
-      className={`group flex gap-6 py-5 border-b border-brand-border last:border-0 ${
-        index % 2 === 0 ? "tilt-hover" : "tilt-hover-alt"
-      }`}
-    >
-      <span className="font-mono text-xs text-brand-text-muted w-10 shrink-0 pt-1">
-        {item.year}
-      </span>
-      <div className="flex-1 min-w-0">
-        <span className="font-serif text-lg text-brand-text group-hover:text-brand-accent">
-          {item.title}
-        </span>
-      </div>
-    </Link>
-  );
+/** full-width, then a pair, then full-width again, so the list never reads as a uniform grid */
+function workRows(projects: Project[]) {
+  const rows: { project: Project; index: number }[][] = [];
+  let i = 0;
+  while (i < projects.length) {
+    const wide = rows.length % 2 === 0 || i === projects.length - 1;
+    const take = wide ? 1 : 2;
+    rows.push(projects.slice(i, i + take).map((project, offset) => ({ project, index: i + offset })));
+    i += take;
+  }
+  return rows;
 }
 
 export default function Home() {
-  const featured = projects.filter((p) => p.featured).slice(0, 4);
-  const featuredResearch = research.filter((r) => r.featured).slice(0, 2);
+  const featured = getFeaturedProjects();
+  const ongoing = getProjects().filter((project) => !project.hasPage);
 
   return (
-    <div>
-      <section className="relative pt-20 pb-16 overflow-hidden">
-        <Blob className="absolute -top-16 -right-24 w-80 h-80 text-brand-accent-tint opacity-60 blur-2xl pointer-events-none" />
-        <Container>
-          <div className="relative">
-            <h1 className="font-serif text-5xl text-brand-accent mb-1">
-              hi, i&apos;m
-            </h1>
-            <p className="font-serif text-6xl text-brand-text">
-              Arham Bhansali
-            </p>
-            <p className="mt-2 text-brand-text-secondary">
-              ECE + Physics · Duke University
-            </p>
-            {site.bioLong.map((paragraph, i) => (
-              <p
-                key={i}
-                className={`max-w-xl text-base text-brand-text-secondary leading-relaxed ${
-                  i === 0 ? "mt-6" : "mt-4"
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-            <div className="mt-8">
-              <Connections />
-            </div>
-          </div>
-        </Container>
+    <>
+      <Hero nodes={orbNodes(featured)} statement={site.tagline} school={site.school} />
+
+      {/* 01 selected projects */}
+      <section className="shell mt-24 scroll-mt-20 md:mt-32" id="work" aria-labelledby="work-heading">
+        <SectionHeader
+          index="01"
+          id="work-heading"
+          title={
+            <>
+              selected <em>projects</em>
+            </>
+          }
+          href="/projects"
+          linkLabel="all projects"
+        />
+        <div className="mt-10 space-y-16 md:mt-14 md:space-y-24">
+          {workRows(featured).map((row, rowIndex) => (
+            <RevealGroup
+              key={rowIndex}
+              className={row.length === 2 ? "grid gap-16 md:grid-cols-2 md:gap-8" : ""}
+            >
+              {row.map(({ project, index }) => (
+                <RevealItem key={project.slug}>
+                  <WorkCard project={project} index={index} wide={row.length === 1} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          ))}
+        </div>
+
+        {ongoing.length > 0 && (
+          <Reveal className="mt-16 grid gap-4 border-t border-line pt-5 md:mt-24 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
+            <h3 className="label">Ongoing</h3>
+            <ul>
+              {ongoing.map((project) => (
+                <li key={project.slug}>
+                  <p className="font-serif text-display-sm text-fg">
+                    {project.title}
+                    {project.status && (
+                      <span className="chip ml-3 translate-y-[-0.35em] border-accent text-accent">{project.status}</span>
+                    )}
+                  </p>
+                  <p className="mt-1 max-w-xl text-[0.9375rem] leading-relaxed text-muted">{project.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        )}
       </section>
 
-      <section className="py-12 border-t border-brand-border">
-        <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
-            <div>
-              <p className="font-script text-2xl text-brand-accent mb-6">
-                things i&apos;ve built...
-              </p>
-              <div>
-                {featured.map((project, i) => (
-                  <WorkRow key={project.slug} project={project} index={i} />
-                ))}
+      {/* 02 research */}
+      <section className="shell mt-28 md:mt-40" aria-labelledby="research-heading">
+        <SectionHeader index="02" id="research-heading" title="research" href="/research" linkLabel="all research" />
+        <RevealGroup as="ol" className="mt-8">
+          {research.map((item, index) => (
+            <RevealItem
+              as="li"
+              key={item.slug}
+              className="grid grid-cols-[2.5rem_1fr] gap-x-2 gap-y-2 border-b border-line py-6 md:grid-cols-[4rem_6rem_minmax(0,1fr)_auto] md:items-baseline md:gap-x-6"
+            >
+              <span className="label">{String(index + 1).padStart(2, "0")}</span>
+              <span className="label col-start-2 md:col-start-auto">{item.year}</span>
+              <div className="col-start-2 md:col-start-auto">
+                <h3 className="font-serif text-2xl leading-tight text-fg md:text-[1.75rem]">
+                  <Link href={`/research/${item.slug}`} className="transition-colors hover:text-accent">
+                    {item.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 text-sm text-muted">
+                  <span className={`chip mr-3 ${item.status === "published" ? "border-accent text-accent" : ""}`}>{item.status}</span>
+                  {item.venue}
+                </p>
               </div>
-              <div className="mt-8">
-                <Link
-                  href="/projects"
-                  className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
+              {item.links?.paper && (
+                <a
+                  href={item.links.paper}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link col-start-2 justify-self-start py-1 text-sm md:col-start-auto"
+                  aria-label={`Paper: ${item.title} (opens in a new tab)`}
                 >
-                  All projects →
-                </Link>
-              </div>
-            </div>
+                  paper ↗
+                </a>
+              )}
+            </RevealItem>
+          ))}
+        </RevealGroup>
 
-            <div>
-              <p className="font-script text-2xl text-brand-accent mb-6">
-                ...and my research
-              </p>
-              <div>
-                {featuredResearch.map((item, i) => (
-                  <ResearchRow key={item.slug} item={item} index={i} />
-                ))}
-              </div>
-              <div className="mt-8">
-                <Link
-                  href="/research"
-                  className="text-sm text-brand-text-muted hover:text-brand-accent transition-colors link-squiggle"
-                >
-                  All research →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
       </section>
-    </div>
+
+      {/* 03 playground */}
+      <section className="mt-28 md:mt-40" aria-labelledby="playground-heading">
+        <div className="shell">
+          <SectionHeader
+            index="03"
+            id="playground-heading"
+            title="playground"
+            href="/photography"
+            linkLabel="open the playground"
+          />
+          <Reveal>
+            <p className="mt-8 max-w-4xl font-serif text-display-sm leading-[1.22] text-fg">{site.playground}</p>
+          </Reveal>
+        </div>
+        <Reveal className="mt-10">
+          <PhotoStrip photos={photos.slice(0, 10).map(resolveShot)} />
+        </Reveal>
+      </section>
+    </>
   );
 }

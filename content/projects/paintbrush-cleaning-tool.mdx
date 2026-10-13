@@ -1,0 +1,82 @@
+---
+title: Paintbrush Cleaning Tool
+year: "2025"
+order: 5
+featured: true
+summary: An autonomous machine that cleans oil paintbrushes, built for a professional painter. I built the custom PCB that runs it.
+tags: [embedded, hardware, PCB design]
+context: Engineering 101 client project, Duke
+role: Custom PCB controlling the motors and other components
+duration: 3 months
+team: Team of four, with Alex Chindris, Justin Fu and Justin Lin
+stack:
+  - Custom PCB
+  - ESP32
+  - Stepper motors and drivers
+  - Limit switches
+  - 80/20 aluminum extrusion
+  - 3D printing
+cover:
+  src: /work/paintbrush-cleaning-tool/device.jpg
+  alt: The paintbrush cleaning tool, a clear acrylic frame with a carriage holding two brushes over the first of three glass containers, and a blue control box beside it
+gallery:
+  - src: /work/paintbrush-cleaning-tool/device.jpg
+    alt: The finished paintbrush cleaning tool with two brushes loaded over the first container
+    caption: "The finished device: carriage on the rail, three containers below, control box on the left."
+  - src: /work/paintbrush-cleaning-tool/pcb-assembled.jpg
+    alt: The assembled control PCB held in a hand, with an ESP32 board and two stepper driver modules plugged in
+    caption: "The assembled board: ESP32 on the left, the two stepper drivers on the right."
+  - src: /work/paintbrush-cleaning-tool/pcb-render.jpg
+    alt: 3D render of the control PCB showing headers for the ESP32 and stepper drivers and the team's names on the silkscreen
+    caption: "The board as a 3D render before fabrication, with the team on the silkscreen."
+  - src: /work/paintbrush-cleaning-tool/final-design.jpg
+    alt: Annotated final design slide labelling the rail, lead screw, carriages, limit switch, containers and the PCB
+    caption: "The final design, annotated."
+---
+
+## TL;DR
+
+A completely autonomous, easy-to-use paintbrush cleaning device, built for an Engineering 101 client project. It moves up to 10 brushes through solvent, soap and water using a dual-carriage system driven by stepper motors and an ESP32. My role was to build the custom PCB that controlled the motors and the other components.
+
+## Why I built it
+
+Our client James Keul, a professional oil painter, came to us with a problem painters deal with constantly — cleaning oil paintbrushes is slow and inefficient, and traditional methods that involve direct physical contact with the brush often cause skin irritation from the solvents involved. We set out to build a completely autonomous, easy-to-use, user-centered paintbrush cleaning device.
+
+## How it works
+
+### Mechanics
+
+The solution uses three containers — one each for the solvent Turpenoid, soap, and water — with a dual-carriage system moving brushes between them. An outer carriage, riding an 80/20 aluminum extrusion for linear motion, travels across all three containers, while an inner carriage supports the brushes within each one; the whole assembly is stabilized with 3D-printed support blocks and aluminum extrusion.
+
+<Figure
+  src="/work/paintbrush-cleaning-tool/device.jpg"
+  alt="The finished paintbrush cleaning tool with two brushes loaded over the first container"
+  caption="Two brushes loaded in the inner carriage, over the first of the three containers."
+/>
+
+### The control board
+
+I built the custom PCB that controls the motors and the other components. An ESP32 plugs into it alongside the two stepper drivers, one for each carriage, with a barrel jack and a DC converter for power.
+
+<TwoUp caption="The board as designed, and as built.">
+  <Figure
+    src="/work/paintbrush-cleaning-tool/pcb-render.jpg"
+    alt="3D render of the control PCB showing headers for the ESP32 and stepper drivers and the team's names on the silkscreen"
+    aspect="1/1"
+  />
+  <Figure
+    src="/work/paintbrush-cleaning-tool/pcb-assembled.jpg"
+    alt="The assembled control PCB held in a hand, with an ESP32 board and two stepper driver modules plugged in"
+    aspect="1/1"
+  />
+</TwoUp>
+
+### Control
+
+Both carriages are driven by stepper motors controlled by the ESP32. On startup, two limit switches calibrate the device by having the outer carriage travel from one end to the other to measure the distance it needs to cover, then return to the origin point, at which point an LCD prompts the user to load brushes into the inner carriage — thinner brushes on one side, thicker ones on the other, up to 10 brushes total — and choose one of three cleaning modes: long, medium, or short.
+
+<Figure
+  src="/work/paintbrush-cleaning-tool/final-design.jpg"
+  alt="Annotated final design slide labelling the rail, lead screw, carriages, limit switch, containers and the PCB"
+  caption="Every part of the final design, labelled."
+/>

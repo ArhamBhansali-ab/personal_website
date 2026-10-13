@@ -1,9 +1,13 @@
 export interface Research {
   title: string;
   slug: string;
+  /** paragraphs; an entry wrapped in $$…$$ is rendered as a LaTeX equation */
   description: string[];
   tags: string[];
   year: string;
+  /** where the work was done or published; shown in the research index */
+  venue: string;
+  status: "published" | "unpublished";
   links?: {
     demo?: string;
     github?: string;
@@ -15,14 +19,26 @@ export interface Research {
 
 export const research: Research[] = [
   {
-    title: "Biological Lifespan of Humans and the Influence of Growth Parameters and Temperature",
+    title: "Modeling Human Lifespan from Cell Division",
     slug: "lifespan-growth-temperature",
     description: [
-      "Completed at the Research Science Institute (RSI) summer program under Prof. James Michaelson of Harvard Medical School. There's currently no mathematical model for projecting an organism's lifespan or how temperature variation affects it. Historically it's taken thousands of years for a meaningful shift in human lifespan, a change attributed to Life History Theory (LHT) — the trade-offs an organism makes to maintain maximum fitness across generations. Before the 18th century, and outside the influence of modern medicine, temperature and climatic variation were the primary drivers of lifespan change, since they affected habitat conditions, internal metabolic rate, and growth itself.",
-      "Lifespan is dependent on specific growth parameters and can be modeled with the lifespan equation, so this research analyzes how varying those parameters — and temperature specifically — affects lifespan, and projects how it could change going forward. It uses the Mitotic Fraction (the fraction of dividing cells in an organism) and the lifespan equation, both part of the Binary Cellular Biology framework, to study temperature's influence on lifespan and predict future lifespan under modern-day climate change.",
+      "Completed at the Research Science Institute (RSI) at MIT under Prof. James Michaelson of Harvard Medical School. There is currently no mathematical model for projecting an organism's lifespan, or for how temperature variation affects it. Life History Theory (LHT) explains lifespan through the trade-offs an organism makes to maintain maximum fitness across generations, and before modern medicine, temperature and climate were the primary drivers of lifespan change, through habitat, metabolic rate, and growth itself.",
+      "The work is built on Binary Cellular Biology, which measures organisms in whole numbers of cells rather than mass, and on its central quantity, the Mitotic Fraction: the fraction of an organism's cells that must be dividing to produce the growth observed. Together with the lifespan equation, it is used to study how growth parameters and temperature affect lifespan, and to project how lifespan could change under modern-day climate change.",
+      "From there the project developed a mechanistic explanation for the Gompertz law of mortality, under which the risk of death rises exponentially with age, doubling roughly every eight years:",
+      String.raw`$$D(t) = G_H\, e^{G_S t}$$`,
+      "Across 12 species the mitotic fraction m follows a power law in the cell count N, and growth obeys:",
+      String.raw`$$m = a^{N^b}, \qquad \frac{dN}{dt} = \frac{\ln 2}{c}\, N\, m(N)$$`,
+      "Growth slowing and aging thus become the same event: the progressive shutdown of cell division, which removes the dilution-repair of cellular damage.",
+      "A two-phase model converts this into mortality. Late in life, division declines roughly linearly. That gives the number of functional cells, such as lymphocytes, where F is how long a cell stays functional after dividing, and a binomial-style failure probability then gives the chance that no cell can respond to a threat:",
+      String.raw`$$m(t) \approx m_0 - m_d\, t, \qquad N_{pf} = N_p\, F\, m(t)$$`,
+      String.raw`$$D_L = (1 - p_a)^{N_{pf}}, \qquad \ln D_L \approx -p_a N_p F m_0 + p_a N_p F m_d\, t$$`,
+      "Because the logarithm of the failure probability is linear in time, a linear decline in cell division yields exponential mortality, recovering the Gompertz law from biological parameters. Simulations reproduced the J-shaped Gompertz–Makeham curve, explaining infant and adult mortality as one failure mode, and fit real data with R² = 0.96. The model also quantified how sex, diabetes, and vaccination shift risk, with each COVID-19 dose cutting death risk by about a third.",
+      "Finally, the mechanism sits within Life History Theory. Suppressing mitosis enables multicellularity and controlled body size early in life at the cost of senescence later: an instance of antagonistic pleiotropy and disposable soma theory, with the trade-off localized to cell-cycle control.",
     ],
-    tags: ["Modeling", "Biology", "Unpublished"],
+    tags: ["Mitotic Fraction", "Binary Cellular Biology", "Modeling"],
     year: "2024",
+    venue: "RSI · Michaelson Lab, Harvard Medical School",
+    status: "unpublished",
     links: {
       paper: "https://drive.google.com/file/d/1s94ZoXdwltKT7kNau0-MWJwDFKxhvyTp/view?usp=sharing",
     },
@@ -37,6 +53,8 @@ export const research: Research[] = [
     ],
     tags: ["MATLAB", "GeoPIV", "Civil Engineering"],
     year: "2023/24",
+    venue: "Civil Engineering, IIT Bombay · Published in Springer Nature",
+    status: "published",
     links: {
       paper: "https://link.springer.com/chapter/10.1007/978-3-031-90928-3_32",
     },
@@ -51,6 +69,8 @@ export const research: Research[] = [
     ],
     tags: ["Data Analysis", "Climate", "Agriculture"],
     year: "2023",
+    venue: "PoCRA study, Maharashtra · Published in BPAS-Geology",
+    status: "published",
     links: {
       paper: "https://openurl.ebsco.com/contentitem/gcd:184857026?sid=ebsco:plink:crawler-gcd&id=ebsco:gcd:184857026&crl=c&jrnl=09704639",
     },
@@ -64,6 +84,8 @@ export const research: Research[] = [
     ],
     tags: ["Climate Policy", "Report"],
     year: "2024",
+    venue: "State Climate Action Cell, Maharashtra",
+    status: "unpublished",
     links: {
       paper: "https://drive.google.com/file/d/1NLRlnG6m9w88cnO0Eo005T662dfjJCAG/view?usp=sharing",
     },

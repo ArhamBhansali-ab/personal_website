@@ -1,7 +1,8 @@
 export const site = {
   name: "Arham Bhansali",
   domain: "arhambhansali.com",
-  tagline: "Engineering sensing systems and neural interfaces that move physics into prediction.",
+  tagline: "Engineering sensing systems and neural interfaces that turn physics into prediction.",
+  school: "ECE + Physics · Duke University",
   bioShort:
     "Electrical & Computer Engineering / Physics student at Duke. I build neurotech, embedded systems, and ML for signal-driven product experiences.",
   bioLong: [
@@ -10,6 +11,11 @@ export const site = {
     "This website is where I put things I've worked on, or have researched about, in the past. Would love to get feedback on any of these things! I'll also regularly drop photos I'm proud of on the photography page, and document what I'm learning about ML and other tech disciplines on the blog.",
     "Ever want to chat about something or build something together, shoot me a dm or mail – always open!",
   ],
+
+  // home page copy
+  playground:
+    "I like to try out new hobbies all the time: photography, DJing, guitar, and a bunch of sports. Hobbies are what make you human, and they're where a lot of my creativity comes from.",
+
   socials: {
     email: "arhambhansali1@gmail.com",
     linkedin: "https://www.linkedin.com/in/arham-bhansali/",
@@ -18,9 +24,31 @@ export const site = {
     github: "https://github.com/ArhamBhansali-ab",
     scholar: "https://scholar.google.com/citations?user=XZ0I5rkAAAAJ&hl=en",
   },
+
+  // "amber" or "blue". The rebuild notice has a switch to preview both.
+  accent: "amber" as "amber" | "blue",
+
+  // shows the "being rebuilt" notice at the top of every page; set to false to remove it
+  rebuilding: true,
+
   // heroImage: place a high-resolution head/portrait in public/images/projects/hero-head.jpg
   // or set this to an external URL. If you want me to fetch and add an image,
   // tell me which source to use and I'll add it to /public/images.
   heroImage: "/images/projects/hero-head.jpg",
 };
 
+export const socialLinks = [
+  { label: "Email", href: `mailto:${site.socials.email}` },
+  { label: "LinkedIn", href: site.socials.linkedin },
+  { label: "Instagram", href: site.socials.instagram },
+  { label: "X", href: site.socials.x },
+  { label: "GitHub", href: site.socials.github },
+  { label: "Scholar", href: site.socials.scholar },
+];
+
+export const navItems = [
+  { href: "/projects", label: "Projects" },
+  { href: "/research", label: "Research" },
+  { href: "/photography", label: "Playground" },
+  { href: "/about", label: "About" },
+];
