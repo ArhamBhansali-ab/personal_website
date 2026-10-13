@@ -10,11 +10,9 @@ const accentLink =
  */
 export default function Hero({
   nodes,
-  statement,
   school,
 }: {
   nodes: OrbNode[];
-  statement: string;
   school: string;
 }) {
   return (
@@ -56,10 +54,7 @@ export default function Hero({
       </nav>
 
       <div className="flex flex-col gap-6 pb-8 md:flex-row md:items-end md:justify-between">
-        <p className="max-w-md text-[0.9375rem] leading-relaxed text-muted">
-          {statement}
-          <span className="mt-1 block text-sm">{school}</span>
-        </p>
+        <p className="text-sm text-muted">{school}</p>
         <p className="label hidden md:block">drag to turn · pick a point</p>
         <p className="flex gap-8 text-sm">
           <Link href="#work" className="link py-2">

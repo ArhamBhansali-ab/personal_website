@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero nodes={orbNodes(featured)} statement={site.tagline} school={site.school} />
+      <Hero nodes={orbNodes(featured)} school={site.school} />
 
       {/* 01 selected projects */}
       <section className="shell mt-24 scroll-mt-20 md:mt-32" id="work" aria-labelledby="work-heading">
