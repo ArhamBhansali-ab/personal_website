@@ -1,7 +1,8 @@
 export const site = {
   name: "Arham Bhansali",
   domain: "arhambhansali.com",
-  tagline: "Engineering sensing systems and neural interfaces that turn physics into prediction.",
+  // shown under the link when the site is shared, and in search results
+  tagline: "Hey! I'm Arham. I like making and trying out stuff.",
   school: "ECE + Physics · Duke University",
   bioShort:
     "Electrical & Computer Engineering / Physics student at Duke. I build neurotech, embedded systems, and ML for signal-driven product experiences.",
