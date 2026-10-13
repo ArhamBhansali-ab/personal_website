@@ -18,7 +18,7 @@ export default function Hero({
   school: string;
 }) {
   return (
-    <section className="shell flex flex-col lg:min-h-[calc(100svh-5.75rem)]">
+    <section className="shell flex flex-col lg:min-h-[calc(100svh-3.5rem)]">
       <h1 className="pt-10 font-serif text-[clamp(2.1rem,3.5vw,3.75rem)] leading-[1.02] tracking-[-0.025em] text-fg sm:pt-12 lg:text-center">
         hey! I&apos;m Arham. <br className="lg:hidden" />I like{" "}
         <Link href="/projects" className={accentLink}>

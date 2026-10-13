@@ -29,7 +29,7 @@ export const site = {
   accent: "amber" as "amber" | "blue",
 
   // shows the "being rebuilt" notice at the top of every page; set to false to remove it
-  rebuilding: true,
+  rebuilding: false,
 
   // heroImage: place a high-resolution head/portrait in public/images/projects/hero-head.jpg
   // or set this to an external URL. If you want me to fetch and add an image,
