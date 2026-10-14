@@ -80,13 +80,6 @@ export default function Home() {
             </RevealGroup>
           ))}
         </div>
-                  </p>
-                  <p className="mt-1 max-w-xl text-[0.9375rem] leading-relaxed text-muted">{project.summary}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        )}
       </section>
 
       {/* 02 research */}
