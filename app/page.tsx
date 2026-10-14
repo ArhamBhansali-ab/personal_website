@@ -8,7 +8,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { site } from "@/content/site";
 import { research } from "@/content/research";
 import { photos } from "@/content/photos";
-import { getFeaturedProjects, getProjects, type Project } from "@/lib/projects";
+import { getFeaturedProjects, type Project } from "@/lib/projects";
 import { resolveShot } from "@/lib/images";
 
 export const metadata = {
@@ -48,7 +48,6 @@ function workRows(projects: Project[]) {
 
 export default function Home() {
   const featured = getFeaturedProjects();
-  const ongoing = getProjects().filter((project) => !project.hasPage);
 
   return (
     <>
@@ -81,18 +80,6 @@ export default function Home() {
             </RevealGroup>
           ))}
         </div>
-
-        {ongoing.length > 0 && (
-          <Reveal className="mt-16 grid gap-4 border-t border-line pt-5 md:mt-24 md:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
-            <h3 className="label">Ongoing</h3>
-            <ul>
-              {ongoing.map((project) => (
-                <li key={project.slug}>
-                  <p className="font-serif text-display-sm text-fg">
-                    {project.title}
-                    {project.status && (
-                      <span className="chip ml-3 translate-y-[-0.35em] border-accent text-accent">{project.status}</span>
-                    )}
                   </p>
                   <p className="mt-1 max-w-xl text-[0.9375rem] leading-relaxed text-muted">{project.summary}</p>
                 </li>
