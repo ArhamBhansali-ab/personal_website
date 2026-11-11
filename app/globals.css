@@ -8,13 +8,13 @@
   color-scheme: light;
 
   /* light is the default */
-  --ink: #f6f6f4; /* canvas */
-  --surface: #ececea; /* placeholders, code */
-  --raised: #e4e4e1;
-  --line: #dcdcd8; /* hairlines */
-  --line-strong: #c4c4bf;
+  --ink: #ebebe8; /* canvas */
+  --surface: #e1e1dd; /* placeholders, code */
+  --raised: #d9d9d4;
+  --line: #d3d3ce; /* hairlines */
+  --line-strong: #b8b8b2;
   --fg: #141414;
-  --muted: #66665f; /* ~5.8:1 on the canvas */
+  --muted: #5e5e57; /* ~5.5:1 on the canvas */
   --prose: #2e2e2b;
   --code: #2a2a2a;
   --code-comment: #7a7a72;
@@ -24,7 +24,7 @@
   --shot-filter: grayscale(1) contrast(1.05) brightness(1.04);
 
   /* the one accent; switch with site.accent in content/site.ts */
-  --accent: #b5650a;
+  --accent: #9a5507;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
 }
 

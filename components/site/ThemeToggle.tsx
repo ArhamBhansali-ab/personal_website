@@ -26,7 +26,7 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     } catch {}
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", next === "dark" ? "#0b0b0b" : "#f6f6f4");
+      ?.setAttribute("content", next === "dark" ? "#0b0b0b" : "#ebebe8");
     setTheme(next);
   };
 
