@@ -8,6 +8,7 @@ import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import RebuildNotice from "@/components/site/RebuildNotice";
 import PersonJsonLd from "@/components/PersonJsonLd";
+import { themeScript } from "@/components/site/ThemeToggle";
 
 const serif = Instrument_Serif({
   subsets: ["latin"],
@@ -50,8 +51,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0b",
-  colorScheme: "dark",
+  themeColor: "#f6f6f4",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
@@ -64,7 +65,11 @@ export default function RootLayout({
       lang="en"
       data-accent={site.accent}
       className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans">
         <a
           href="#main"

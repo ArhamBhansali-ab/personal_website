@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navItems, site, socialLinks } from "@/content/site";
+import ThemeToggle from "@/components/site/ThemeToggle";
 
 export default function Nav() {
   const pathname = usePathname() ?? "";
@@ -73,18 +74,24 @@ export default function Nav() {
               </li>
             );
           })}
+          <li>
+            <ThemeToggle />
+          </li>
         </ul>
 
-        <button
-          ref={toggleRef}
-          type="button"
-          className="relative z-50 -mr-2 px-2 py-2 text-sm text-fg md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? "close" : "menu"}
-        </button>
+        <div className="relative z-50 flex items-center gap-4 md:hidden">
+          <ThemeToggle className="py-2" />
+          <button
+            ref={toggleRef}
+            type="button"
+            className="-mr-2 px-2 py-2 text-sm text-fg"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? "close" : "menu"}
+          </button>
+        </div>
       </nav>
 
       <div

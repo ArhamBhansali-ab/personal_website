@@ -5,22 +5,55 @@
 /* ------------------------------------------------------------------ tokens */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --ink: #0b0b0b; /* canvas */
-  --surface: #111111; /* placeholders, code */
-  --raised: #171717;
-  --line: #222222; /* hairlines */
-  --line-strong: #343434;
-  --fg: #ededed;
-  --muted: #8a8a8a; /* 5.7:1 on the canvas */
+  /* light is the default */
+  --ink: #f6f6f4; /* canvas */
+  --surface: #ececea; /* placeholders, code */
+  --raised: #e4e4e1;
+  --line: #dcdcd8; /* hairlines */
+  --line-strong: #c4c4bf;
+  --fg: #141414;
+  --muted: #66665f; /* ~5.8:1 on the canvas */
+  --prose: #2e2e2b;
+  --code: #2a2a2a;
+  --code-comment: #7a7a72;
+  --code-strong: #000000;
+  --stripe: rgba(0, 0, 0, 0.035);
+  --dither-blend: multiply;
+  --shot-filter: grayscale(1) contrast(1.05) brightness(1.04);
 
   /* the one accent; switch with site.accent in content/site.ts */
-  --accent: #e9a23b;
+  --accent: #b5650a;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 :root[data-accent="blue"] {
+  --accent: #1f5fd1;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ink: #0b0b0b;
+  --surface: #111111;
+  --raised: #171717;
+  --line: #222222;
+  --line-strong: #343434;
+  --fg: #ededed;
+  --muted: #8a8a8a; /* 5.7:1 on the canvas */
+  --prose: #cfcfcf;
+  --code: #d6d6d6;
+  --code-comment: #7d7d7d;
+  --code-strong: #ffffff;
+  --stripe: rgba(255, 255, 255, 0.022);
+  --dither-blend: screen;
+  --shot-filter: var(--shot-filter);
+
+  --accent: #e9a23b;
+}
+
+:root[data-theme="dark"][data-accent="blue"] {
   --accent: #6ea8ff;
 }
 
@@ -34,6 +67,7 @@
 
 html {
   background: var(--ink);
+  transition: background-color 250ms ease;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -142,7 +176,7 @@ html.lenis body {
     object-fit: cover;
     image-rendering: pixelated;
     opacity: 0;
-    mix-blend-mode: screen;
+    mix-blend-mode: var(--dither-blend);
     pointer-events: none;
     transition: opacity 600ms ease;
   }
@@ -151,7 +185,7 @@ html.lenis body {
      only on devices that can hover, so touch screens always get full colour */
   @media (hover: hover) {
     .shot--treated .shot__img {
-      filter: grayscale(1) contrast(1.08) brightness(0.62);
+      filter: var(--shot-filter);
     }
     .shot--treated .shot__dither {
       opacity: 0.32;
@@ -180,7 +214,7 @@ html.lenis body {
     background-image: repeating-linear-gradient(
       135deg,
       transparent 0 11px,
-      rgba(255, 255, 255, 0.022) 11px 12px
+      var(--stripe) 11px 12px
     );
   }
 
@@ -199,7 +233,7 @@ html.lenis body {
   .prose-site {
     font-size: 1.0625rem;
     line-height: 1.75;
-    color: #cfcfcf;
+    color: var(--prose);
   }
   .prose-site > * + * {
     margin-top: 1.4em;
@@ -281,7 +315,7 @@ html.lenis body {
     font-family: theme("fontFamily.mono");
     font-size: 0.8125rem;
     line-height: 1.7;
-    color: #d6d6d6;
+    color: var(--code);
     tab-size: 2;
   }
   .prose-site blockquote {
@@ -321,7 +355,7 @@ html.lenis body {
   /* syntax colours: greys plus the accent, nothing else */
   .hljs-comment,
   .hljs-quote {
-    color: #7d7d7d;
+    color: var(--code-comment);
     font-style: italic;
   }
   .hljs-keyword,
@@ -334,11 +368,11 @@ html.lenis body {
   .hljs-number,
   .hljs-literal,
   .hljs-attr {
-    color: #f2f2f2;
+    color: var(--code);
   }
   .hljs-title,
   .hljs-function .hljs-title {
-    color: #ffffff;
+    color: var(--code-strong);
     font-weight: 500;
   }
 
